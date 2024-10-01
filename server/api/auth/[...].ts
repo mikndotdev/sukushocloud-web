@@ -1,8 +1,8 @@
+import type { AuthConfig } from "@auth/core/types"
 import { NuxtAuthHandler } from '#auth'
-import type { JWT } from "next-auth/jwt";
 const config = useRuntimeConfig();
 
-async function refreshAccessToken(token: JWT) {
+async function refreshAccessToken(token: any) {
     try {
         const response = await fetch("https://auth.mikandev.com/oidc/token", {
             method: "POST",
@@ -38,7 +38,7 @@ async function refreshAccessToken(token: JWT) {
     }
 }
 
-export default NuxtAuthHandler({
+export const authOptions: AuthConfig = {
     secret: config.nextauthSecret,
     callbacks: {
         async jwt({ token, account, user }) {
@@ -106,9 +106,8 @@ export default NuxtAuthHandler({
         {
             id: "logto",
             name: "MikanDev Account",
-            type: "oauth",
-            wellKnown:
-                "https://auth.mikandev.com/oidc/.well-known/openid-configuration",
+            type: "oidc",
+            issuer:"https://auth.mikandev.com/oidc",
             authorization: {
                 params: {
                     scope: "openid offline_access profile email identities",
@@ -119,7 +118,7 @@ export default NuxtAuthHandler({
             client: {
                 id_token_signed_response_alg: "ES384",
             },
-            idToken: true,
+            token: true,
             profile(profile) {
                 return {
                     id: profile.sub,
@@ -131,4 +130,6 @@ export default NuxtAuthHandler({
             },
         },
     ],
-});
+};
+
+export default NuxtAuthHandler(authOptions, config)

@@ -12,17 +12,8 @@ export default defineNuxtConfig({
     logtoClientSecret: '',
     nextauthSecret: '',
   },
-  modules: ['@nuxt/ui', '@sidebase/nuxt-auth'],
-  auth: {
-    isEnabled: true,
-    disableServerSideAuth: false,
-    originEnvKey: 'CF_PAGES_URL',
-    baseURL: 'http://localhost:3000/api/auth',
-    provider: {
-      type: 'authjs',
-      trustHost: false,
-      defaultProvider: 'logto',
-      addDefaultCallbackUrl: true
-    }
-  }
+  modules: [
+    '@nuxt/ui',
+    '@hebilicious/authjs-nuxt'
+  ],
 })

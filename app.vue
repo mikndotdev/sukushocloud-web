@@ -1,9 +1,22 @@
 <script setup lang="ts">
-const { status, getSession, data } = useAuth()
+const { status, session, data } = useAuth()
 </script>
 
 <template>
-  You are currently {{ status }}.
-  {{ data }}
-  <UButton @click="() => getSession({ required: true })">Login</UButton>
+  <div>
+    <div>
+      <a href="/api/auth/signin" class="buttonPrimary">Native Link Sign in</a>
+      <button @click="signIn()">
+        JS Sign In
+      </button>
+      <button @click="signOut()">
+        Sign Out
+      </button>
+    </div>
+    <div>
+      <pre>{{ status }}</pre>
+      <pre>{{ session?.user }}</pre>
+      <pre>{{ cookies }}</pre>
+    </div>
+  </div>
 </template>
