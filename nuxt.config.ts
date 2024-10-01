@@ -11,6 +11,12 @@ export default defineNuxtConfig({
     logtoClientId: '',
     logtoClientSecret: '',
     nextauthSecret: '',
+    public: {
+      authJs: {
+        baseUrl: process.env.CF_PAGES_URL,
+        verifyClientOnEveryRequest: true
+      }
+    },
   },
   modules: [
     '@nuxt/ui',
