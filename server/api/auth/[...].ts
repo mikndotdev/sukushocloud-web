@@ -39,7 +39,7 @@ async function refreshAccessToken(token: any) {
 }
 
 export const authOptions: AuthConfig = {
-    secret: config.nextauthSecret,
+    secret: config.authJs.secret,
     callbacks: {
         async jwt({ token, account, user }) {
             // Initial sign in

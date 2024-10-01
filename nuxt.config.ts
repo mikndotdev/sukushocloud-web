@@ -11,6 +11,9 @@ export default defineNuxtConfig({
     logtoClientId: '',
     logtoClientSecret: '',
     nextauthSecret: '',
+    authJs: {
+      secret: process.env.NUXT_NEXTAUTH_SECRET
+    },
     public: {
       authJs: {
         baseUrl: process.env.CF_PAGES_URL,
