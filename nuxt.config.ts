@@ -1,11 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  nitro: {
+      prerender: {
+        autoSubfolderIndex: false
+    },
+  },
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  nitro: {
-    prerender: {
-      autoSubfolderIndex: false
-  },
   runtimeConfig: {
     logtoClientId: '',
     logtoClientSecret: '',
