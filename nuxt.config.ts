@@ -8,9 +8,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   runtimeConfig: {
-    logtoClientId: '',
-    logtoClientSecret: '',
-    nextauthSecret: '',
+    logtoClientId: process.env.NUXT_LOGTO_CLIENT_ID,
+    logtoClientSecret: process.env.NUXT_LOGTO_CLIENT_SECRET,
+    nextauthSecret: process.env.NUXT_NEXTAUTH_SECRET,
     authJs: {
       secret: process.env.NUXT_NEXTAUTH_SECRET
     },
