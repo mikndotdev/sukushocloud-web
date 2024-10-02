@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     },
     public: {
       authJs: {
-        baseUrl: process.env.CF_PAGES_URL,
+        baseUrl: process.env.NUXT_PUBLIC_AUTHJS_BASE_URL,
         verifyClientOnEveryRequest: true
       }
     },
