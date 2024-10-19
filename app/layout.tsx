@@ -17,6 +17,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${hsr.className} antialiased`}>{children}</body>
+            <script defer src="https://analytics.mikandev.com/script.js" data-website-id="2bc3e16e-558d-43ef-a7a3-dafd1fb59dd3"/>
         </html>
     );
 }
