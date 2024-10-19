@@ -7,10 +7,14 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "format": "biome format --write ."
+        "format": "biome format --write .",
+        "pages:build": "npx @cloudflare/next-on-pages",
+        "preview": "bun run pages:build && wrangler pages dev",
+        "deploy": "bun run pages:build && wrangler pages deploy"
     },
     "dependencies": {
         "@biomejs/biome": "^1.9.4",
+        "@cloudflare/next-on-pages": "^1.13.5",
         "@headlessui/react": "^2.1.10",
         "@radix-ui/react-dialog": "^1.1.2",
         "@radix-ui/react-separator": "^1.1.0",

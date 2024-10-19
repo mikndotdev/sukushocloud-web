@@ -119,7 +119,6 @@ export interface AlertDialogFooterProps
      *
      * @default 'DEFAULT'
      */
-    actionColor?: ButtonProps["colorScheme"];
     /**
      * 続行ボタンを押したときに実行される関数
      */
@@ -144,7 +143,6 @@ export const AlertDialogFooter = forwardRef<
         {
             className,
             actionText = "続行",
-            actionColor = "DEFAULT",
             onAction,
             cancelText = "キャンセル",
             onCancel,
@@ -160,9 +158,7 @@ export const AlertDialogFooter = forwardRef<
             <Button variant="ghost" onClick={onCancel}>
                 {cancelText}
             </Button>
-            <Button colorScheme={actionColor} onClick={onAction}>
-                {actionText}
-            </Button>
+            <Button onClick={onAction}>{actionText}</Button>
         </div>
     ),
 );

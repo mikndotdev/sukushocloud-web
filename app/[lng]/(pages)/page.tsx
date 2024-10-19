@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import Image from "next/image";
 import { Heading } from "@/app/components/nUI/Heading";
 import { Button } from "@/app/components/shadcn/ui/button";
