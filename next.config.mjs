@@ -2,7 +2,7 @@
 const nextConfig = {
     images: {
         loader: 'custom',
-        loaderFile: './cfImgLoader.js',
+        loaderFile: './cfImgLoader.ts',
     },
 };
 
