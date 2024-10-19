@@ -1,4 +1,4 @@
-const normalizeSrc = src => {
+const normalizeSrc = (src: string) => {
     return src.startsWith('/') ? src.slice(1) : src;
   };
   
