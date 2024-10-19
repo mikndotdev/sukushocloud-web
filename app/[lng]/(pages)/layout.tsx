@@ -177,7 +177,11 @@ export default function PagesLayout({
                     buttonText="Yum! 🍪"
                     cookieName="CookieConsent"
                     style={{ background: "#6214d2" }}
-                    buttonStyle={{ color: "#7c3aed", fontSize: "13px" }}
+                    buttonStyle={{
+                        color: "#FFFFFF",
+                        fontSize: "13px",
+                        background: "#7c3aed",
+                    }}
                     expires={150}
                 >
                     We use cookies to enhance your experience. Would you like
