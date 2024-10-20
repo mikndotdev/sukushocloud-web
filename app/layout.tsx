@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -17,7 +18,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${hsr.className} antialiased`}>
-                {children}
+                <SessionProvider>{children}</SessionProvider>
                 <script
                     defer
                     src="https://analytics.mikandev.com/script.js"

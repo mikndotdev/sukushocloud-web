@@ -42,69 +42,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         maxAge: 14 * 24 * 60 * 60, // 30 days
     },
     secret: process.env.NEXTAUTH_SECRET,
-    callbacks: {
-        async jwt({ token, account, user }) {
-            // Initial sign in
-            if (account && user) {
-                return {
-                    accessToken: account.access_token,
-                    accessTokenExpires: account.expires_at
-                        ? account.expires_at * 1000
-                        : undefined,
-                    refreshToken: account.refresh_token,
-                    user,
-                };
-            }
-
-            // Return previous token if the access token has not expired yet
-            if (Date.now() < (token.accessTokenExpires as number)) {
-                return token;
-            }
-
-            // Access token has expired, try to update it
-            return refreshAccessToken(token);
-        },
-        async session({ session, token }) {
-            if (token.error) {
-                // Handle error state here
-                return { ...session, error: token.error };
-            }
-
-            // Fetch user info with the new access token
-            try {
-                const response = await fetch(
-                    "https://auth.mikandev.com/oidc/me",
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token.accessToken}`,
-                        },
-                    },
-                );
-
-                if (response.ok) {
-                    const userInfo = await response.json();
-                    session.user = {
-                        id: userInfo.sub,
-                        name: userInfo.name ?? userInfo.username,
-                        email: userInfo.email,
-                        image: userInfo.picture,
-                        discord: userInfo.identities?.discord?.userId,
-                        emailVerified: userInfo.email_verified ?? null,
-                    };
-                } else {
-                    console.error(
-                        "Failed to fetch user info:",
-                        response.statusText,
-                    );
-                }
-            } catch (error) {
-                console.error("Error fetching user info:", error);
-            }
-
-            (session as any).accessToken = token.accessToken;
-            return session;
-        },
-    },
     providers: [
         {
             id: "logto",
