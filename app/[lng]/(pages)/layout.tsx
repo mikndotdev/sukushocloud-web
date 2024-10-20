@@ -132,11 +132,9 @@ export default function PagesLayout({
         {
             href: "/dashboard",
             title: "Dashboard",
-            colorScheme: "primary",
         },
         {
             title: "🌎",
-            colorScheme: "primary",
             onClick: () => {
                 changeLanguage();
             },
