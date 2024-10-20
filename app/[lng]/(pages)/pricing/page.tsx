@@ -94,22 +94,32 @@ export default function Home({ params: { lng } }: Props) {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {plans.map((plan, index) => (
-                        <Card key={index} className="flex flex-col bg-inherit border-primary">
+                        <Card
+                            key={index}
+                            className="flex flex-col bg-inherit border-primary"
+                        >
                             <CardHeader>
-                                <CardTitle className="text-white">{plan.title}</CardTitle>
+                                <CardTitle className="text-white">
+                                    {plan.title}
+                                </CardTitle>
                                 <Heading size="md" className="text-gray-300">
                                     {plan.blurb}
                                 </Heading>
                             </CardHeader>
                             <CardContent className="flex-grow">
                                 {plan.features.map((feature, fIndex) => (
-                                    <CardDescription key={fIndex} className="text-gray-300 mb-2">
-                                        {typeof feature === 'string' ? (
+                                    <CardDescription
+                                        key={fIndex}
+                                        className="text-gray-300 mb-2"
+                                    >
+                                        {typeof feature === "string" ? (
                                             <FaCheckCircle className="inline mr-2 text-green-500" />
                                         ) : (
                                             <FaHeart className="inline mr-2 text-red-500" />
                                         )}
-                                        {typeof feature === 'string' ? feature : feature.text}
+                                        {typeof feature === "string"
+                                            ? feature
+                                            : feature.text}
                                     </CardDescription>
                                 ))}
                             </CardContent>

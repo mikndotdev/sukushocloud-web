@@ -10,6 +10,13 @@ import CookieConsent from "react-cookie-consent";
 import { FaDiscord, FaGithub, FaTwitter } from "react-icons/fa";
 import { SiMisskey } from "react-icons/si";
 
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/app/components/shadcn/ui/tooltip";
+
 export default function PagesLayout({
     children,
 }: { children: React.ReactNode }) {
@@ -181,13 +188,22 @@ export default function PagesLayout({
                 className="text-white bg-[#6214d2]"
             >
                 <div className="flex items-center self-end">
-                    <Image
-                        src={MikanCat.src}
-                        width={200}
-                        height={100}
-                        alt="MikanDev Tech"
-                        className="ml-2 mb-0"
-                    />
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Image
+                                    src={MikanCat.src}
+                                    width={200}
+                                    height={100}
+                                    alt="MikanDev Tech"
+                                    className="ml-2 mb-0"
+                                />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>:3</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </div>
             </Footer>
         </>
