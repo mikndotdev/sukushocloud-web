@@ -38,6 +38,9 @@ async function refreshAccessToken(token: JWT) {
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+    session: {
+        maxAge: 14 * 24 * 60 * 60, // 30 days
+    },
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
         async jwt({ token, account, user }) {
@@ -113,6 +116,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     scope: "openid offline_access profile email identities",
                 },
             },
+
             clientId: process.env.LOGTO_CLIENT_ID,
             clientSecret: process.env.LOGTO_CLIENT_SECRET,
             client: {

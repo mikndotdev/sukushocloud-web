@@ -45,10 +45,6 @@ export default function PagesLayout({
             name: "Contact",
             href: "https://mikn.dev/contact",
         },
-        {
-            name: "Payment Center",
-            href: "https://payments.mikandev.com/",
-        },
     ];
 
     const social = [
@@ -87,16 +83,8 @@ export default function PagesLayout({
                     href: "https://payments.mikandev.com/",
                 },
                 {
-                    name: "About us",
-                    href: "/vision",
-                },
-                {
-                    name: "Partners",
-                    href: "/partners",
-                },
-                {
                     name: "Services",
-                    href: "/solutions",
+                    href: "https:/mikn.dev/solutions",
                 },
                 {
                     name: "Blog",
@@ -113,7 +101,7 @@ export default function PagesLayout({
                 },
                 {
                     name: "Contact Info",
-                    href: "/contact",
+                    href: "https://mikn.dev/contact",
                 },
             ],
         },
