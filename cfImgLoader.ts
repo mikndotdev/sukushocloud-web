@@ -7,7 +7,7 @@ export default function cloudflareLoader({
     width,
     quality,
 }: { src: string; width: number; quality?: number }) {
-    const isLocal = !src.includes("localhost");
+    const isLocal = src.includes("localhost");
 
     if (isLocal) {
         return src;
