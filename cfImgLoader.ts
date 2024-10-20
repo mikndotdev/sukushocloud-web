@@ -7,12 +7,9 @@ export default function cloudflareLoader({
     width,
     quality,
 }: { src: string; width: number; quality?: number }) {
-    const isLocal = src.includes("localhost");
-
-    if (isLocal) {
+    if (process.env.NODE_ENV === "development") {
         return src;
     }
-
     const params = [`width=${width}`];
     if (quality) {
         params.push(`quality=${quality}`);
