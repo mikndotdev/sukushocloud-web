@@ -31,5 +31,24 @@
         "transformDescription": "分かりやすい画像処理APIで画像をダイナミックに変換できます。*",
         "personalize": "カスタマイズ",
         "personalizeDescription": "自分だけのブランドやスタイルでスクリーンショットページをカスタマイズできます。*"
+    },
+    "navigation": {
+        "home": "ホーム",
+        "features": "機能",
+        "pricing": "料金",
+        "contact": "お問い合わせ",
+        "docs": "ドキュメント",
+        "dashboard": "管理パネル",
+        "resources": "リソース",
+        "payments": "支払いセンター",
+        "solutions": "ソリューション",
+        "blog": "ブログ",
+        "support": "サポート",
+        "discord": "Discord",
+        "legal": "法的事項",
+        "privacy": "プライバシーポリシー",
+        "terms": "利用規約",
+        "jp-payments": "特定商取引法に基づく表記",
+        "gdpr": "GDPR準拠"
     }
 }

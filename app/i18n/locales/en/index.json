@@ -31,5 +31,24 @@
         "transformDescription": "Dynamically transform your images with our powerful image processing API.*",
         "personalize": "Personalize",
         "personalizeDescription": "Customize your screenshots page with your own branding and style.*"
+    },
+    "navigation": {
+        "home": "Home",
+        "features": "Features",
+        "pricing": "Pricing",
+        "contact": "Contact",
+        "docs": "Docs",
+        "dashboard": "Dashboard",
+        "resources": "Resources",
+        "payments": "Payment Center",
+        "solutions": "Solutions",
+        "blog": "Blog",
+        "support": "Support",
+        "discord": "Discord",
+        "legal": "Legal",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service",
+        "jp-payments": "特定商取引法に基づく表記",
+        "gdpr": "GDPR Compliance"
     }
 }

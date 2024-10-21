@@ -1,4 +1,5 @@
 "use client";
+import { useClientTranslation } from "@/app/i18n/client";
 import { Header } from "@/app/components/nUI/Header";
 import { Footer } from "@/app/components/nUI/Footer";
 import Image from "next/image";
@@ -17,11 +18,18 @@ import {
     TooltipTrigger,
 } from "@/app/components/shadcn/ui/tooltip";
 
-export default function PagesLayout({
-    children,
-}: { children: React.ReactNode }) {
+interface Props {
+    params: {
+        lng: string;
+    };
+    children: React.ReactNode;
+}
+
+export default function PagesLayout({ params: { lng }, children }: Props) {
     const router = useRouter();
     const pathname = usePathname();
+    const { t } = useClientTranslation(lng, "index");
+    const en = lng === "en";
 
     const changeLanguage = () => {
         //@ts-ignore
@@ -37,19 +45,19 @@ export default function PagesLayout({
 
     const nav = [
         {
-            name: "Homepage",
+            name: t("navigation.home"),
             href: "/",
         },
         {
-            name: "Pricing",
+            name: t("navigation.pricing"),
             href: "/pricing",
         },
         {
-            name: "Documentation",
+            name: t("navigation.docs"),
             href: "https://docs.sukusho.cloud/",
         },
         {
-            name: "Contact",
+            name: t("navigation.contact"),
             href: "https://mikn.dev/contact",
         },
     ];
@@ -83,52 +91,52 @@ export default function PagesLayout({
 
     const links = [
         {
-            name: "Resouces",
+            name: t("navigation.resources"),
             children: [
                 {
-                    name: "Payment Center",
+                    name: t("navigation.payments"),
                     href: "https://payments.mikandev.com/",
                 },
                 {
-                    name: "Services",
+                    name: t("navigation.solutions"),
                     href: "https:/mikn.dev/solutions",
                 },
                 {
-                    name: "Blog",
+                    name: t("navigation.blog"),
                     href: "https://blog.mikn.dev/",
                 },
             ],
         },
         {
-            name: "Support",
+            name: t("navigation.support"),
             children: [
                 {
-                    name: "Discord",
+                    name: t("navigation.discord"),
                     href: "https://discord.gg/FZCN6fjPuG",
                 },
                 {
-                    name: "Contact Info",
+                    name: t("navigation.contact"),
                     href: "https://mikn.dev/contact",
                 },
             ],
         },
         {
-            name: "Legal",
+            name: t("navigation.legal"),
             children: [
                 {
-                    name: "Terms of use",
+                    name: t("navigation.terms"),
                     href: "https://docs.mikn.dev/legal/terms",
                 },
                 {
-                    name: "Privacy policy",
+                    name: t("navigation.privacy"),
                     href: "https://docs.mikn.dev/legal/privacy",
                 },
                 {
-                    name: "Payments",
+                    name: t("navigation.jp-payments"),
                     href: "https://docs.mikn.dev/legal/jp-payments",
                 },
                 {
-                    name: "GDPR",
+                    name: t("navigation.gdpr"),
                     href: "https://docs.mikn.dev/legal/dpa",
                 },
             ],
@@ -138,7 +146,7 @@ export default function PagesLayout({
     const buttons = [
         {
             href: "/dashboard",
-            title: "Dashboard",
+            title: t("navigation.dashboard"),
         },
         {
             title: "🌎",
