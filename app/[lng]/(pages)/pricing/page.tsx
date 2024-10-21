@@ -77,7 +77,7 @@ export default function Home({ params: { lng } }: Props) {
                 t("proUltDescription4"),
                 { text: t("proUltDescription5"), icon: "heart" },
             ],
-            link: "/dashboard/upgrade",
+            link: "/dashboard/manage/plan",
         },
     ];
 

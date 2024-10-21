@@ -80,7 +80,7 @@ export function AppSidebar({ params: { lng } }: Props) {
     };
 
     return (
-        <Sidebar className="border-primary">
+        <Sidebar className="border-primary" variant="sidebar">
             <SidebarHeader>
                 <div className="flex flex-row items-center justify-center">
                     <Image
