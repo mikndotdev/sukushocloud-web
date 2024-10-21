@@ -19,7 +19,7 @@ export default function Home({ params: { lng } }: Props) {
     const router = useRouter();
     const { data: session } = useSession();
     const { t } = useClientTranslation(lng, "dashboard/login");
-    const en = lng.split("-")[0] === "en";
+    const en = lng === "en";
 
     if (session) {
         router.push("/dashboard/manage");

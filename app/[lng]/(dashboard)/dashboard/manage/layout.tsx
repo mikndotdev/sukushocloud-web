@@ -7,30 +7,23 @@ import { AppSidebar } from "@/app/components/sidebar";
 import { useRouter, usePathname } from "next/navigation";
 import CookieConsent from "react-cookie-consent";
 
-export default function PagesLayout({
-    children,
-}: { children: React.ReactNode }) {
+interface Props {
+    params: {
+        lng: string;
+    };
+    children: React.ReactNode;
+}
+
+export default function PagesLayout({ params: { lng }, children }: Props) {
     const router = useRouter();
     const pathname = usePathname();
-
-    const changeLanguage = () => {
-        //@ts-ignore
-        const pathSegments = pathname.split("/");
-        if (pathSegments[1] === "en") {
-            pathSegments[1] = "ja";
-        } else if (pathSegments[1] === "ja") {
-            pathSegments[1] = "en";
-        }
-        const newPath = pathSegments.join("/");
-        router.push(newPath);
-    };
 
     return (
         <>
             <SidebarProvider>
-                <AppSidebar />
+                <AppSidebar params={{ lng }} />
                 <main>
-                    <SidebarTrigger />
+                    <SidebarTrigger className="text-white bg-inherit hover:bg-primary hover:text-white" />
                     {children}
                 </main>
             </SidebarProvider>

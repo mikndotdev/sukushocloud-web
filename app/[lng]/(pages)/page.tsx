@@ -39,7 +39,7 @@ interface Props {
 
 export default function Home({ params: { lng } }: Props) {
     const { t } = useClientTranslation(lng, "index");
-    const en = lng.split("-")[0] === "en";
+    const en = lng === "en";
 
     return (
         <main className="min-h-screen px-4 sm:px-6 lg:px-8">
