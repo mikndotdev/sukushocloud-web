@@ -1,0 +1,9 @@
+{
+    "uploadedAt": "アップロード日時",
+    "copyLink": "短縮リンクをコピー",
+    "copyUrl": "ファイルURLをコピー",
+    "edit": "変換",
+    "upgrade": "変換APIをアンロック",
+    "urlCopied": "ファイルURLがクリップボードにコピーされました",
+    "linkCopied": "短縮リンクがクリップボードにコピーされました"
+}

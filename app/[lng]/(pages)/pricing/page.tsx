@@ -50,7 +50,7 @@ export default function Home({ params: { lng } }: Props) {
                 t("proLiteDescription1"),
                 t("proLiteDescription2"),
             ],
-            link: "/dashboard/upgrade",
+            link: "/dashboard/manage/plan",
         },
         {
             title: t("proStd"),
@@ -63,7 +63,7 @@ export default function Home({ params: { lng } }: Props) {
                 t("proStdDescription3"),
                 t("proStdDescription4"),
             ],
-            link: "/dashboard/upgrade",
+            link: "/dashboard/manage/plan",
         },
         {
             title: t("proUlt"),

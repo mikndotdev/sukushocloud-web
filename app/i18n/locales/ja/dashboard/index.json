@@ -5,5 +5,6 @@
     "upgrade": "アップグレード",
     "usage": "ご利用状況",
     "totalStorage": "ストレージ",
-    "files": "ファイル数"
+    "files": "ファイル数",
+    "recentFiles": "最近アップロードされたファイル"
 }
