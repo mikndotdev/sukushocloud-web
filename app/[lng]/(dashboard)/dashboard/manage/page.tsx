@@ -166,6 +166,7 @@ export default function Home({ params: { lng } }: Props) {
                                 shortUrl={file.shortUrl}
                                 size={file.size}
                                 url={file.url}
+                                lng={lng}
                                 isPremium={
                                     !(
                                         data.plan === "FREE" ||
