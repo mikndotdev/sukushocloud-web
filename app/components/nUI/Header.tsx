@@ -267,7 +267,7 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>(
                         variants={mobileMenuContainerVariants}
                     >
                         <motion.ul
-                            className="flex h-full w-full flex-col border-t border-outline bg-background px-6 py-4"
+                            className="flex h-full w-full flex-col border-t border-outline bg-[#222244] px-6 py-4"
                             variants={mobileMenuItemContainerVariants}
                         >
                             {navigation.map((item, index) => {
@@ -300,6 +300,7 @@ export const Header = forwardRef<HTMLDivElement, HeaderProps>(
                                     {buttons?.map((buttonProps) => {
                                         return (
                                             <Button
+                                                className="bg-primary"
                                                 key={buttonProps.title}
                                                 {...buttonProps}
                                             >
