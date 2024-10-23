@@ -44,6 +44,7 @@ export function AppSidebar({ params: { lng } }: Props) {
 
     const [data, setData] = useState<UserInfo | null>(null);
     const [infoLoading, setInfoLoading] = useState(true);
+    const PageOnDashboard = pathname.split("/").pop();
 
     useEffect(() => {
         if (status === "unauthenticated") {
@@ -103,25 +104,25 @@ export function AppSidebar({ params: { lng } }: Props) {
             <SidebarContent>
                 <SidebarGroup className="space-y-2">
                     <Link href="/dashboard/manage">
-                        <Button variant="default" className="w-full text-white">
+                        <Button variant="default" className="w-full text-white" disabled={PageOnDashboard==="manage"}>
                             <FaHome className="mr-1" />
                             {t("home")}
                         </Button>
                     </Link>
                     <Link href="/dashboard/manage/files">
-                        <Button variant="default" className="w-full text-white">
+                        <Button variant="default" className="w-full text-white" disabled={PageOnDashboard==="files"}>
                             <FaFile className="mr-1" />
                             {t("files")}
                         </Button>
                     </Link>
                     <Link href="/dashboard/manage/settings">
-                        <Button variant="default" className="w-full text-white">
+                        <Button variant="default" className="w-full text-white" disabled={PageOnDashboard==="settings"}>
                             <FaGear className="mr-1" />
                             {t("settings")}
                         </Button>
                     </Link>
                     <Link href="/dashboard/manage/plan">
-                        <Button variant="default" className="w-full text-white">
+                        <Button variant="default" className="w-full text-white" disabled={PageOnDashboard==="plan"}>
                             <FaMoneyBill className="mr-1" />
                             {t("plan")}
                         </Button>

@@ -21,9 +21,8 @@ export default function PagesLayout({ params: { lng }, children }: Props) {
                 <div className="grid grid-cols-[auto,1fr] h-screen">
                     <AppSidebar params={{ lng }} />
                     <main className="flex flex-col items-center justify-center">
-                        <SidebarInset className="ml-10 bg-inherit">
-                            <SidebarTrigger className="text-white bg-inherit hover:bg-primary hover:text-white mt-5" />
-
+                        <SidebarInset className="ml-0 md:ml-10 bg-inherit">
+                            <SidebarTrigger className="text-white bg-inherit hover:bg-primary hover:text-white ml-10 md:ml-0 mt-5 mb-5" />
                             {children}
                         </SidebarInset>
                     </main>

@@ -57,69 +57,77 @@ export function FileComponent({
 
     return (
         <main>
-            <AlertDialog open={isOpen}>
-                <AlertDialogContent className="bg-inherit text-white border-primary">
-                    <AlertDialogHeader>
-                        <div className="flex items-center justify-between w-full">
-                            <AlertDialogTitle>{name}</AlertDialogTitle>
+<AlertDialog open={isOpen}>
+                <AlertDialogContent className="bg-inherit text-white border-primary max-w-3xl w-[95vw] mx-auto p-4 md:p-6">
+                    <AlertDialogHeader className="space-y-4">
+                        <div className="flex items-center justify-between w-full gap-4">
+                            <AlertDialogTitle className="text-lg md:text-xl font-semibold truncate">
+                                {name}
+                            </AlertDialogTitle>
                             <Button
-                                className="bg-red-600 hover:bg-red-700"
+                                className="bg-red-600 hover:bg-red-700 shrink-0"
                                 onClick={() => setIsOpen(false)}
                             >
-                                <FaCircleXmark className="w-6 h-6" />
+                                <FaCircleXmark className="w-5 h-5" />
                             </Button>
                         </div>
+                        <AlertDialogDescription className="text-sm md:text-base opacity-80">
+                            {t("uploadedAt")} {new Date(date).toLocaleString()}
+                        </AlertDialogDescription>
                     </AlertDialogHeader>
-                    <AlertDialogDescription>
-                        {t("uploadedAt")} {new Date(date).toLocaleString()}
-                    </AlertDialogDescription>
-                    <div className="flex items-center justify-center w-full h-full">
+
+                    <div className="relative w-full my-4 rounded-lg overflow-hidden aspect-square md:aspect-auto md:h-[60vh]">
                         <Image
                             src={url}
                             alt={name}
-                            width={400}
-                            height={400}
+                            fill
+                            className="object-contain"
                             unoptimized
                         />
                     </div>
-                    <AlertDialogFooter>
-                        <Button
-                            className="bg-primary hover:bg-primary"
-                            onClick={() => copyUrl(url)}
-                        >
-                            <FaImage className="w-6 h-6" />
-                            {t("copyUrl")}
-                        </Button>
-                        <Button
-                            className="bg-primary hover:bg-primary"
-                            onClick={() => copyLink(shortUrl)}
-                        >
-                            <FaLink className="w-6 h-6" />
-                            {t("copyLink")}
-                        </Button>
-                    </AlertDialogFooter>
-                    <AlertDialogFooter>
-                        {isPremium ? (
-                            <Link href={`/dashboard/manage/edit/${id}`}>
-                                <Button className="bg-primary hover:bg-primary">
-                                    <MdOutlinePhotoSizeSelectLarge className="w-6 h-6" />
-                                    {t("edit")}
-                                </Button>
-                            </Link>
-                        ) : (
-                            <Link href="/dashboard/manage/plan">
-                                <Button className="bg-yellow-600 hover:bg-yellow-600 animate-pulse">
-                                    <MdOutlinePhotoSizeSelectLarge className="w-6 h-6" />
-                                    {t("upgrade")}
-                                </Button>
-                            </Link>
-                        )}
-                        <Link href={`/dashboard/manage/delete/${id}`}>
-                            <Button className="bg-red-600 hover:bg-red-700">
-                                <FaTrash className="w-6 h-6" />
+
+                    <div className="space-y-4">
+                        <div className="grid grid-cols-2 gap-3">
+                            <Button
+                                className="bg-primary hover:bg-primary/90 w-full"
+                                onClick={() => copyUrl(url)}
+                            >
+                                <FaImage className="w-4 h-4 mr-2" />
+                                <span className="truncate">{t("copyUrl")}</span>
                             </Button>
-                        </Link>
-                    </AlertDialogFooter>
+                            <Button
+                                className="bg-primary hover:bg-primary/90 w-full"
+                                onClick={() => copyLink(shortUrl)}
+                            >
+                                <FaLink className="w-4 h-4 mr-2" />
+                                <span className="truncate">{t("copyLink")}</span>
+                            </Button>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-3">
+                            {isPremium ? (
+                                <Link href={`/dashboard/manage/edit/${id}`} className="w-full">
+                                    <Button className="bg-primary hover:bg-primary/90 w-full">
+                                        <MdOutlinePhotoSizeSelectLarge className="w-4 h-4 mr-2" />
+                                        <span className="truncate">{t("edit")}</span>
+                                    </Button>
+                                </Link>
+                            ) : (
+                                <Link href="/dashboard/manage/plan" className="w-full">
+                                    <Button className="bg-yellow-600 hover:bg-yellow-700 w-full animate-pulse">
+                                        <MdOutlinePhotoSizeSelectLarge className="w-4 h-4 mr-2" />
+                                        <span className="truncate">{t("upgrade")}</span>
+                                    </Button>
+                                </Link>
+                            )}
+                            <Link href={`/dashboard/manage/delete/${id}`} className="w-full">
+                                <Button className="bg-red-600 hover:bg-red-700 w-full">
+                                    <FaTrash className="w-4 h-4 mr-2" />
+                                    <span className="truncate">{t("delete")}</span>
+                                </Button>
+                            </Link>
+                        </div>
+                    </div>
                 </AlertDialogContent>
             </AlertDialog>
             <Card
