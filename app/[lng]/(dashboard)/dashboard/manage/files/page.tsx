@@ -29,13 +29,12 @@ export default function Home({ params: { lng } }: Props) {
 
     interface UserInfo {
         plan: string;
-        filesList: any;
     }
 
     const [data, setData] = useState<UserInfo | null>(null);
     const [totalStorage, setTotalStorage] = useState(0);
     const [totalUsage, setTotalUsage] = useState(0);
-    const [files, setFiles] = useState(null);
+    const [files, setFiles] = useState<any[]>([]);
     const [infoLoading, setInfoLoading] = useState(true);
 
     useEffect(() => {
