@@ -67,7 +67,7 @@ export default function Home({ params: { lng } }: Props) {
 
     return (
         <div className="flex min-h-screen">
-            <main className="w-full p-4 md:p-10">
+            <main className="w-full p-4 md:p-0">
                 <Heading size="4xl" className="text-white break-words">
                     {t("welcomeMessage")} {session?.user.name}
                 </Heading>

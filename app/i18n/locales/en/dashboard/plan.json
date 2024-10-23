@@ -24,5 +24,9 @@
     "proUltDescription3": "Priority support",
     "proUltDescription4": "Custom link shortening",
     "proUltDescription5": "My love and affection",
-    "getStarted": "Subscribe Now"
+    "getStarted": "Subscribe Now",
+    "customerPortal": "Manage your subscription in the customer portal",
+    "manageSubscription": "Manage subscription",
+    "redirectingToPortal": "Redirecting to the customer portal...",
+    "portalError": "An error occurred while redirecting to the customer portal. Please try again later."
 }

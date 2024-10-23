@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Heading } from "@/app/components/nUI/Heading";
 import { Button } from "@/app/components/shadcn/ui/button";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useSession, signIn } from "next-auth/react";
 import { useClientTranslation } from "@/app/i18n/client";
@@ -97,6 +98,28 @@ export default function Home({ params: { lng } }: Props) {
         }
     }, [status]);
 
+    const openPortal = async () => {
+        toast.info(t("redirectingToPortal"));
+        try {
+            const response = await fetch("/api/userinfo/customerPortal", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (!response.ok) {
+                toast.error(t("portalError"));
+                return;
+            }
+
+            const data = await response.json();
+            router.push(data.url);
+        } catch (error) {
+            toast.error(t("portalError"));
+        }
+    };
+
     if (status === "loading" || infoLoading) {
         return (
             <div className="flex min-h-screen items-center justify-center p-4">
@@ -107,7 +130,7 @@ export default function Home({ params: { lng } }: Props) {
 
     return (
         <div className="flex min-h-screen">
-            <main className="w-full p-4 md:p-10">
+            <main className="w-full p-4 md:p-0">
                 <Heading size="4xl" className="text-white break-words">
                     {t("welcomeMessage")} {session?.user.name}
                 </Heading>
@@ -132,13 +155,10 @@ export default function Home({ params: { lng } }: Props) {
                     </div>
                 </div>
                 <div className="container mx-auto max-w-7xl pb-16">
-                    {data?.plan === "FREE" && (
+                    {data?.plan === "FREE" ? (
                         <div>
                             <div className="flex flex-row bg-inherit border-primary mt-10 space-x-2">
-                                <Heading
-                                    size="2xl"
-                                    className="text-white"
-                                >
+                                <Heading size="2xl" className="text-white">
                                     {t("unlockFeatures")}
                                 </Heading>
                                 <Heading
@@ -205,6 +225,23 @@ export default function Home({ params: { lng } }: Props) {
                                     </Card>
                                 ))}
                             </div>
+                        </div>
+                    ) : (
+                        <div>
+                            <div className="flex flex-row bg-inherit border-primary mt-10 space-x-2">
+                                <Heading
+                                    size="2xl"
+                                    className="text-white font-thin"
+                                >
+                                    {t("customerPortal")}
+                                </Heading>
+                            </div>
+                            <Button
+                                className="w-full sm:w-auto mt-3"
+                                onClick={() => openPortal()}
+                            >
+                                {t("manageSubscription")}
+                            </Button>
                         </div>
                     )}
                 </div>
