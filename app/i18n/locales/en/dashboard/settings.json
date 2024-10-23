@@ -1,0 +1,10 @@
+{
+    "settings": "Account Settings",
+    "apiKey": "API Key",
+    "copy": "Copy",
+    "reset": "Reset API Key",
+    "downloadSXCU": "Download SXCU config",
+    "copied": "Copied to clipboard",
+    "resetSuccess": "API Key reset successfully",
+    "resetError": "Failed to reset API Key"
+}

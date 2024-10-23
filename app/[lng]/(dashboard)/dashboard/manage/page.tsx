@@ -22,7 +22,6 @@ interface Props {
 }
 
 export default function Home({ params: { lng } }: Props) {
-    const router = useRouter();
     const { data: session, status } = useSession();
     const { t } = useClientTranslation(lng, "dashboard/index");
     const en = lng === "en";

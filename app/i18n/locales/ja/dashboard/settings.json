@@ -1,0 +1,10 @@
+{
+    "settings": "アカウント設定",
+    "apiKey": "APIキー",
+    "copy": "コピー",
+    "reset": "APIキーをリセット",
+    "downloadSXCU": "ShareX設定ファイルをダウンロード",
+    "copied": "クリップボードにコピーしました",
+    "resetSuccess": "APIキーをリセットしました",
+    "resetError": "APIキーのリセットに失敗しました"
+}

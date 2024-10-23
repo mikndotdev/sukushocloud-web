@@ -70,7 +70,6 @@ export default function Home({ params: { lng } }: Props) {
         }
     }, [status]);
 
-
     if (status === "loading" || infoLoading) {
         return (
             <div className="flex min-h-screen items-center justify-center p-4">
@@ -82,11 +81,7 @@ export default function Home({ params: { lng } }: Props) {
     return (
         <div className="flex min-h-screen">
             <main className="w-full p-4 md:p-0">
-                <Heading size="4xl" className="text-white break-words">
-                    {t("welcomeMessage")} {session?.user.name}
-                </Heading>
-
-                <div className="flex flex-row space-x-5 mt-5 mb-5">
+                <div className="flex flex-row space-x-5 mb-5">
                     <Heading size="2xl" className="text-white">
                         {t("Files")}
                     </Heading>
