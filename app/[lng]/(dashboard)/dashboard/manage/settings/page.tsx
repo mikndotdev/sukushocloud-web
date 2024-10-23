@@ -110,7 +110,7 @@ export default function Home({ params: { lng } }: Props) {
 
     return (
         <div className="flex min-h-screen">
-            <main className="w-full px-4 py-6 md:px-6 lg:px-8 max-w-7xl mx-auto">
+            <main className="w-full px-4 md:px-0 max-w-7xl mx-auto">
                 <div className="space-y-6">
                     {/* Header */}
                     <div className="flex flex-col space-y-2">
