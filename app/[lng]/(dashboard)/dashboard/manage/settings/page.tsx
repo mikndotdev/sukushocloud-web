@@ -71,14 +71,6 @@ export default function Home({ params: { lng } }: Props) {
         toast.success(t("resetSuccess"));
     };
 
-    if (status === "loading" || infoLoading) {
-        return (
-            <div className="flex min-h-screen items-center justify-center p-4">
-                <AiOutlineLoading3Quarters className="w-12 h-12 animate-spin text-white" />
-            </div>
-        );
-    }
-
     const downloadSXCU = async () => {
         const sxcu = JSON.stringify(
             {
@@ -108,46 +100,75 @@ export default function Home({ params: { lng } }: Props) {
         document.body.removeChild(a);
     };
 
+    if (status === "loading" || infoLoading) {
+        return (
+            <div className="flex min-h-screen items-center justify-center p-4">
+                <AiOutlineLoading3Quarters className="w-12 h-12 animate-spin text-white" />
+            </div>
+        );
+    }
+
     return (
         <div className="flex min-h-screen">
-            <main className="w-full p-4 md:p-0">
-                <div className="flex flex-col md:flex-row md:items-center gap-3">
-                    <Heading size="2xl" className="text-white">
-                        {t("settings")}
-                    </Heading>
-                </div>
-                <div className="flex flex-col md:flex-col gap-3 mt-5">
-                    <Heading size="2xl" className="text-white">
-                        {t("apiKey")}
-                    </Heading>
-                    <Input
-                        placeholder={apiKey}
-                        className="w-96 border-primary"
-                        disabled
-                    />
-                </div>
-                <div className="flex flex-row mt-3 space-x-2">
-                    <Button
-                        onClick={() => {
-                            navigator.clipboard.writeText(data?.apiKey);
-                            toast.success(t("copied"));
-                        }}
-                        className="bg-primary"
-                    >
-                        <FaCopy className="w-5 h-5" />
-                        {t("copy")}
-                    </Button>
-                    <Button
-                        variant={"destructive"}
-                        onClick={() => resetAPIKey()}
-                    >
-                        <GrPowerReset className="w-5 h-5" />
-                        {t("reset")}
-                    </Button>
-                    <Button onClick={() => downloadSXCU()}>
-                        <SiSharex className="w-5 h-5" />
-                        {t("downloadSXCU")}
-                    </Button>
+            <main className="w-full px-4 py-6 md:px-6 lg:px-8 max-w-7xl mx-auto">
+                <div className="space-y-6">
+                    {/* Header */}
+                    <div className="flex flex-col space-y-2">
+                        <Heading size="2xl" className="text-white">
+                            {t("settings")}
+                        </Heading>
+                    </div>
+
+                    {/* API Key Section */}
+                    <div className="space-y-4">
+                        <Heading size="2xl" className="text-white">
+                            {t("apiKey")}
+                        </Heading>
+
+                        {/* API Key Input - Full width on mobile */}
+                        <div className="w-full md:w-96">
+                            <Input
+                                placeholder={apiKey}
+                                className="w-full border-primary"
+                                disabled
+                            />
+                        </div>
+
+                        {/* Action Buttons - Stack on mobile, row on desktop */}
+                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-2">
+                            <Button
+                                onClick={() => {
+                                    if (data?.apiKey) {
+                                        navigator.clipboard.writeText(
+                                            data.apiKey,
+                                        );
+                                        toast.success(t("copied"));
+                                    } else {
+                                        toast.error(t("copyError"));
+                                    }
+                                }}
+                                className="w-full sm:w-auto bg-primary"
+                            >
+                                <FaCopy className="w-5 h-5 mr-2" />
+                                {t("copy")}
+                            </Button>
+                            <Button
+                                variant="destructive"
+                                onClick={() => resetAPIKey()}
+                                className="w-full sm:w-auto"
+                            >
+                                <GrPowerReset className="w-5 h-5 mr-2" />
+                                {t("reset")}
+                            </Button>
+                            <Button
+                                onClick={() => downloadSXCU()}
+                                className="w-full sm:w-auto"
+                            >
+                                <SiSharex className="w-5 h-5 mr-2" />
+                                {t("downloadSXCU")}
+                            </Button>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>
