@@ -1,3 +1,4 @@
+export const runtime = "edge";
 import { Heading } from "@/app/components/nUI/Heading";
 
 interface Props {
