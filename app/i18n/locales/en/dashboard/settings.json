@@ -6,5 +6,21 @@
     "downloadSXCU": "Download SXCU config",
     "copied": "Copied to clipboard",
     "resetSuccess": "API Key reset successfully",
-    "resetError": "Failed to reset API Key"
+    "resetError": "Failed to reset API Key",
+    "prefRegion": "Preferred Storage Region",
+    "selectRegion": "Select a region",
+    "fra": "Frankfurt, Germany",
+    "gru": "Sao Paulo, Brazil",
+    "hkg": "Hong Kong, Hong Kong",
+    "iad": "Ashburn, Virginia (US)",
+    "jnb": "Johannesburg, South Africa",
+    "lhr": "London, United Kingdom",
+    "mad": "Madrid, Spain",
+    "nrt": "Tokyo, Japan",
+    "ord": "Chicago, Illinois (US)",
+    "sin": "Singapore, Singapore",
+    "sjc": "San Jose, California (US)",
+    "syd": "Sydney, Australia",
+    "generalError": "An error occurred",
+    "regionSet": "Region set successfully"
 }

@@ -6,5 +6,21 @@
     "downloadSXCU": "ShareX設定ファイルをダウンロード",
     "copied": "クリップボードにコピーしました",
     "resetSuccess": "APIキーをリセットしました",
-    "resetError": "APIキーのリセットに失敗しました"
+    "resetError": "APIキーのリセットに失敗しました",
+    "prefRegion": "ストレージリージョン",
+    "selectRegion": "リージョンを選択",
+    "fra": "フランクフルト",
+    "gru": "サンパウロ",
+    "hkg": "香港",
+    "iad": "アシュバーン（米国）",
+    "jnb": "ヨハネスブルグ",
+    "lhr": "ロンドン",
+    "mad": "マドリード",
+    "nrt": "東京",
+    "ord": "シカゴ（米国）",
+    "sin": "シンガポール",
+    "sjc": "サンノゼ（米国）",
+    "syd": "シドニー",
+    "generalError": "エラーが発生しました",
+    "regionSet": "リージョンを設定しました"
 }

@@ -1,10 +1,20 @@
 "use client";
+import Flag from "react-flagkit";
+
 export const runtime = "edge";
 
 import Image from "next/image";
 import Link from "next/link";
 import { Heading } from "@/app/components/nUI/Heading";
 import { Button } from "@/app/components/shadcn/ui/button";
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/app/components/shadcn/ui/select";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useSession, signIn } from "next-auth/react";
@@ -37,6 +47,22 @@ export default function Home({ params: { lng } }: Props) {
     const [data, setData] = useState<UserInfo | null>(null);
     const [apiKey, setApiKey] = useState("");
     const [infoLoading, setInfoLoading] = useState(true);
+    const [selectedRegion, setSelectedRegion] = useState("");
+
+    const regions = [
+        { name: t("fra"), value: "fra", flag: "DE" },
+        { name: t("lhr"), value: "lhr", flag: "GB" },
+        { name: t("mad"), value: "mad", flag: "ES" },
+        { name: t("iad"), value: "iad", flag: "US" },
+        { name: t("ord"), value: "ord", flag: "US" },
+        { name: t("sjc"), value: "sjc", flag: "US" },
+        { name: t("gru"), value: "gru", flag: "BR" },
+        { name: t("jnb"), value: "jnb", flag: "ZA" },
+        { name: t("nrt"), value: "nrt", flag: "JP" },
+        { name: t("hkg"), value: "hkg", flag: "HK" },
+        { name: t("sin"), value: "sin", flag: "SG" },
+        { name: t("syd"), value: "syd", flag: "AU" },
+    ];
 
     useEffect(() => {
         if (status === "authenticated") {
@@ -50,6 +76,7 @@ export default function Home({ params: { lng } }: Props) {
                 .then((data) => {
                     setData(data);
                     setApiKey(data.apiKey);
+                    setSelectedRegion(data.preferredRegion);
                     setInfoLoading(false);
                 });
         }
@@ -69,6 +96,30 @@ export default function Home({ params: { lng } }: Props) {
         const json = await res.json();
         setApiKey(json.key);
         toast.success(t("resetSuccess"));
+    };
+
+    const setSelectecdRegion = (region: string) => {
+        fetch("/api/userinfo/setRegion", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ region }),
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    toast.error(t("generalError"));
+                    return;
+                }
+                return res.json();
+            })
+            .then((json) => {
+                setSelectedRegion(json.region);
+                toast.success(t("regionSet"));
+            })
+            .catch(() => {
+                toast.error(t("generalError"));
+            });
     };
 
     const downloadSXCU = async () => {
@@ -168,6 +219,34 @@ export default function Home({ params: { lng } }: Props) {
                                 {t("downloadSXCU")}
                             </Button>
                         </div>
+                    </div>
+                    <div className="space-y-4">
+                        <Heading size="2xl" className="text-white">
+                            {t("prefRegion")}
+                        </Heading>
+                        <Select
+                            value={selectedRegion}
+                            onValueChange={setSelectecdRegion}
+                        >
+                            <SelectTrigger className="border-primary">
+                                <SelectValue placeholder={t("selectRegion")} />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup className="">
+                                    {regions.map((region) => (
+                                        <SelectItem value={region.value}>
+                                            <div className="flex items-center gap-2">
+                                                <span>{region.name}</span>
+                                                <Flag
+                                                    country={region.flag}
+                                                    className="w-6 h-6"
+                                                />
+                                            </div>
+                                        </SelectItem>
+                                    ))}
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
                     </div>
                 </div>
             </main>
