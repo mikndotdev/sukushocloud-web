@@ -139,17 +139,19 @@ export default function Home({ params: { lng } }: Props) {
     const downloadSXCU = async () => {
         const sxcu = JSON.stringify(
             {
-                Version: "16.1.0",
-                Name: "sukushocloud - Upload file",
-                DestinationType: "ImageUploader",
-                RequestMethod: "POST",
-                RequestURL: "https://api.sukusho.cloud/upload",
-                Headers: {
-                    Authorization: `Bearer ${data?.apiKey}`,
+                "Version": "16.1.0",
+                "Name": "sukushocloud - Upload file",
+                "DestinationType": "ImageUploader",
+                "RequestMethod": "POST",
+                "RequestURL": "https://api.sukusho.cloud/upload",
+                "Headers": {
+                    "Authorization": `Bearer ${apiKey}`,
                 },
-                Body: "MultipartFormData",
-                FileFormName: "file",
-                URL: "{json:shortUrl}",
+                "Body": "MultipartFormData",
+                "FileFormName": "file",
+                "URL": "{json:shortUrl}",
+                "DeletionURL": "{json:deleteUrl}",
+                "ErrorMessage": "{response}"
             },
             null,
             2,
