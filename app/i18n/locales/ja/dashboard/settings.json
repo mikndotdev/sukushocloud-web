@@ -22,5 +22,13 @@
     "sjc": "サンノゼ（米国）",
     "syd": "シドニー",
     "generalError": "エラーが発生しました",
-    "regionSet": "リージョンを設定しました"
+    "regionSet": "リージョンを設定しました",
+    "embedSettings": "埋め込み設定",
+    "embedTitle": "埋め込みタイトル",
+    "embedFooter": "埋め込み説明",
+    "upgrade": "アップグレードして",
+    "toUnlock": "ロック解除",
+    "embedPreview": "埋め込みプレビュー",
+    "save": "保存",
+    "embedSaved": "埋め込み設定を保存しました"
 }

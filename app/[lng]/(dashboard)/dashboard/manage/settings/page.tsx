@@ -3,7 +3,6 @@ import Flag from "react-flagkit";
 
 export const runtime = "edge";
 
-import Image from "next/image";
 import Link from "next/link";
 import { Heading } from "@/app/components/nUI/Heading";
 import { Button } from "@/app/components/shadcn/ui/button";
@@ -15,9 +14,16 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/app/components/shadcn/ui/select";
+import { Input } from "@/app/components/shadcn/ui/input";
 import { toast } from "sonner";
+import {
+    DiscordMessage,
+    DiscordMessages,
+    DiscordEmbed,
+} from "@danktuary/react-discord-message";
 import { useRouter } from "next/navigation";
 import { useSession, signIn } from "next-auth/react";
+import { SketchPicker } from "react-color";
 import { useClientTranslation } from "@/app/i18n/client";
 import { useState, useEffect } from "react";
 
@@ -25,7 +31,9 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaCopy } from "react-icons/fa";
 import { GrPowerReset } from "react-icons/gr";
 import { SiSharex } from "react-icons/si";
-import { Input } from "@/app/components/shadcn/ui/input";
+
+import Screenshot from "@/app/assets/dev-is-a-weeb.png";
+import { FaFloppyDisk } from "react-icons/fa6";
 
 interface Props {
     params: {
@@ -48,6 +56,9 @@ export default function Home({ params: { lng } }: Props) {
     const [apiKey, setApiKey] = useState("");
     const [infoLoading, setInfoLoading] = useState(true);
     const [selectedRegion, setSelectedRegion] = useState("");
+    const [embedHeader, setEmbedHeader] = useState("");
+    const [embedFooter, setEmbedFooter] = useState("");
+    const [embedColor, setEmbedColor] = useState("");
 
     const regions = [
         { name: t("fra"), value: "fra", flag: "DE" },
@@ -77,6 +88,9 @@ export default function Home({ params: { lng } }: Props) {
                     setData(data);
                     setApiKey(data.apiKey);
                     setSelectedRegion(data.preferredRegion);
+                    setEmbedHeader(data.embedHeader);
+                    setEmbedFooter(data.embedFooter);
+                    setEmbedColor(data.embedColor);
                     setInfoLoading(false);
                 });
         }
@@ -151,6 +165,26 @@ export default function Home({ params: { lng } }: Props) {
         document.body.removeChild(a);
     };
 
+    const saveEmbed = async () => {
+        const res = await fetch("/api/userinfo/setEmbed", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                header: embedHeader,
+                footer: embedFooter,
+                color: embedColor,
+            }),
+        });
+        if (!res.ok) {
+            toast.error(t("generalError"));
+            return;
+        }
+        const json = await res.json();
+        toast.success(t("embedSaved"));
+    };
+
     if (status === "loading" || infoLoading) {
         return (
             <div className="flex min-h-screen items-center justify-center p-4">
@@ -162,7 +196,7 @@ export default function Home({ params: { lng } }: Props) {
     return (
         <div className="flex min-h-screen">
             <main className="w-full px-4 md:px-0 max-w-7xl mx-auto">
-                <div className="space-y-6">
+                <div className="space-y-6 pb-10">
                     {/* Header */}
                     <div className="flex flex-col space-y-2">
                         <Heading size="2xl" className="text-white">
@@ -228,7 +262,7 @@ export default function Home({ params: { lng } }: Props) {
                             value={selectedRegion}
                             onValueChange={setSelectecdRegion}
                         >
-                            <SelectTrigger className="border-primary">
+                            <SelectTrigger className="border-primary w-1/2">
                                 <SelectValue placeholder={t("selectRegion")} />
                             </SelectTrigger>
                             <SelectContent>
@@ -247,6 +281,73 @@ export default function Home({ params: { lng } }: Props) {
                                 </SelectGroup>
                             </SelectContent>
                         </Select>
+                    </div>
+                    <div className="space-y-4">
+                        <Heading size="2xl" className="text-white">
+                            {t("embedSettings")}
+                        </Heading>
+                        <Input
+                            value={embedHeader}
+                            onChange={(e) => setEmbedHeader(e.target.value)}
+                            placeholder={t("embedHeader")}
+                            className="w-1/2 border-primary"
+                        />
+                        <div className="flex flex-row items-center space-x-2">
+                            <Input
+                                value={embedFooter}
+                                onChange={(e) => setEmbedFooter(e.target.value)}
+                                placeholder={t("embedFooter")}
+                                className="w-1/2 border-primary"
+                                disabled={data?.plan === "FREE"}
+                            />
+                            {data?.plan == "FREE" && (
+                                <div className="flex flex-row space-x-1">
+                                    <Link href={"/dashboard/manage/plan"}>
+                                        <Heading
+                                            size="xl"
+                                            className="text-yellow-400 font-thin"
+                                        >
+                                            {t("upgrade")}
+                                        </Heading>
+                                    </Link>
+                                    <Heading
+                                        size="xl"
+                                        className="text-white font-thin"
+                                    >
+                                        {t("toUnlock")}
+                                    </Heading>
+                                </div>
+                            )}
+                        </div>
+                        <SketchPicker
+                            color={embedColor}
+                            onChange={(color: any) => setEmbedColor(color.hex)}
+                            className="w-full"
+                        />
+                        <Heading size="2xl" className="text-white">
+                            {t("embedPreview")}
+                        </Heading>
+                        <DiscordMessages>
+                            <DiscordMessage
+                                author={session?.user.name}
+                                avatar={session?.user.image}
+                            >
+                                https://sksh.me/example
+                                <DiscordEmbed
+                                    color={embedColor}
+                                    slot="embeds"
+                                    title={embedHeader}
+                                    image={Screenshot.src}
+                                    url="#"
+                                >
+                                    {embedFooter}
+                                </DiscordEmbed>
+                            </DiscordMessage>
+                        </DiscordMessages>
+                        <Button onClick={() => saveEmbed()} className="">
+                            <FaFloppyDisk className="w-5 h-5 mr-2" />
+                            {t("save")}
+                        </Button>
                     </div>
                 </div>
             </main>

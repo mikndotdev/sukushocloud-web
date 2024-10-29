@@ -20,4 +20,4 @@ export default function Delete({ params: { lng } }: Props) {
             </div>
         </div>
     );
-};
+}

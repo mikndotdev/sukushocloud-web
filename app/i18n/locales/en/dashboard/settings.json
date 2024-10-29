@@ -22,5 +22,13 @@
     "sjc": "San Jose, California (US)",
     "syd": "Sydney, Australia",
     "generalError": "An error occurred",
-    "regionSet": "Region set successfully"
+    "regionSet": "Region set successfully",
+    "embedSettings": "Embed Settings",
+    "embedTitle": "Embed Title",
+    "embedFooter": "Embed Description",
+    "upgrade": "Upgrade",
+    "toUnlock": "to unlock",
+    "embedPreview": "Embed Preview",
+    "save": "Save",
+    "embedSaved": "Embed settings saved"
 }

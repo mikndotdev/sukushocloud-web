@@ -13,7 +13,7 @@ export async function GET() {
     if (session) {
         redirect("/dashboard/manage");
     } else {
-        "use server";
+        ("use server");
         await signIn("logto", { redirectTo: "/dashboard/manage" });
     }
 }
