@@ -218,7 +218,7 @@ export function AppSidebar({ params: { lng } }: Props) {
                     </Link>
                 )}
                 <Button
-                    onClick={() => signOut()}
+                    onClick={() => signOut({ redirectTo: "/" })}
                     variant="destructive"
                     disabled={!(status === "authenticated")}
                 >
