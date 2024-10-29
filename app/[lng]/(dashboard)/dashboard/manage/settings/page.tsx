@@ -298,9 +298,9 @@ export default function Home({ params: { lng } }: Props) {
                                 onChange={(e) => setEmbedFooter(e.target.value)}
                                 placeholder={t("embedFooter")}
                                 className="w-1/2 border-primary"
-                                disabled={data?.plan === "FREE"}
+                                disabled={data?.plan === "FREE" || data?.plan === "ProLite"}
                             />
-                            {data?.plan == "FREE" && (
+                            {data?.plan == "FREE" || data?.plan == "ProLite" && (
                                 <div className="flex flex-row space-x-1">
                                     <Link href={"/dashboard/manage/plan"}>
                                         <Heading
