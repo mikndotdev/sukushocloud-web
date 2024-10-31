@@ -7,10 +7,11 @@ import { Heading } from "@/app/components/nUI/Heading";
 import { Button } from "@/app/components/shadcn/ui/button";
 import { FileComponent } from "@/app/components/fileComponent";
 import { GaugeComponent } from "react-gauge-component";
-import { useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useSession, signIn } from "next-auth/react";
 import { useClientTranslation } from "@/app/i18n/client";
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Card, CardContent, CardTitle } from "@/app/components/shadcn/ui/card";
@@ -23,6 +24,8 @@ interface Props {
 
 export default function Home({ params: { lng } }: Props) {
     const { data: session, status } = useSession();
+    const params = useSearchParams();
+    const router = useRouter();
     const { t } = useClientTranslation(lng, "dashboard/index");
     const en = lng === "en";
 
@@ -55,6 +58,17 @@ export default function Home({ params: { lng } }: Props) {
                 });
         }
     }, [status]);
+
+    useEffect(() => {
+        if (params.get("deleted") === "true") {
+            toast.success(t("fileDeleted"));
+            router.replace("/dashboard/manage");
+        }
+        if (params.get("deleted") === "failed") {
+            toast.error(t("fileDeleteFailed"));
+            router.replace("/dashboard/manage");
+        }
+    }, []);
 
     if (status === "loading" || infoLoading) {
         return (

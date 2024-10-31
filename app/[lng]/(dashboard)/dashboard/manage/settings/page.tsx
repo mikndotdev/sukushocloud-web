@@ -139,19 +139,19 @@ export default function Home({ params: { lng } }: Props) {
     const downloadSXCU = async () => {
         const sxcu = JSON.stringify(
             {
-                "Version": "16.1.0",
-                "Name": "sukushocloud - Upload file",
-                "DestinationType": "ImageUploader",
-                "RequestMethod": "POST",
-                "RequestURL": "https://api.sukusho.cloud/upload",
-                "Headers": {
-                    "Authorization": `Bearer ${apiKey}`,
+                Version: "16.1.0",
+                Name: "sukushocloud - Upload file",
+                DestinationType: "ImageUploader",
+                RequestMethod: "POST",
+                RequestURL: "https://api.sukusho.cloud/upload",
+                Headers: {
+                    Authorization: `Bearer ${apiKey}`,
                 },
-                "Body": "MultipartFormData",
-                "FileFormName": "file",
-                "URL": "{json:shortUrl}",
-                "DeletionURL": "{json:deleteUrl}",
-                "ErrorMessage": "{response}"
+                Body: "MultipartFormData",
+                FileFormName: "file",
+                URL: "{json:shortUrl}",
+                DeletionURL: "{json:deleteUrl}",
+                ErrorMessage: "{response}",
             },
             null,
             2,
@@ -300,26 +300,30 @@ export default function Home({ params: { lng } }: Props) {
                                 onChange={(e) => setEmbedFooter(e.target.value)}
                                 placeholder={t("embedFooter")}
                                 className="w-1/2 border-primary"
-                                disabled={data?.plan === "FREE" || data?.plan === "ProLite"}
+                                disabled={
+                                    data?.plan === "FREE" ||
+                                    data?.plan === "ProLite"
+                                }
                             />
-                            {data?.plan == "FREE" || data?.plan == "ProLite" && (
-                                <div className="flex flex-row space-x-1">
-                                    <Link href={"/dashboard/manage/plan"}>
+                            {data?.plan == "FREE" ||
+                                (data?.plan == "ProLite" && (
+                                    <div className="flex flex-row space-x-1">
+                                        <Link href={"/dashboard/manage/plan"}>
+                                            <Heading
+                                                size="xl"
+                                                className="text-yellow-400 font-thin"
+                                            >
+                                                {t("upgrade")}
+                                            </Heading>
+                                        </Link>
                                         <Heading
                                             size="xl"
-                                            className="text-yellow-400 font-thin"
+                                            className="text-white font-thin"
                                         >
-                                            {t("upgrade")}
+                                            {t("toUnlock")}
                                         </Heading>
-                                    </Link>
-                                    <Heading
-                                        size="xl"
-                                        className="text-white font-thin"
-                                    >
-                                        {t("toUnlock")}
-                                    </Heading>
-                                </div>
-                            )}
+                                    </div>
+                                ))}
                         </div>
                         <SketchPicker
                             color={embedColor}

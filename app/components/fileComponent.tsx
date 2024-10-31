@@ -133,7 +133,7 @@ export function FileComponent({
                                 </Link>
                             )}
                             <Link
-                                href={`/dashboard/manage/delete/${id}`}
+                                href={`/dashboard/delete/${id}`}
                                 className="w-full"
                             >
                                 <Button className="bg-red-600 hover:bg-red-700 w-full">

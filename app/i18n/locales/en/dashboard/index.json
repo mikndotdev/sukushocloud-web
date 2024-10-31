@@ -6,5 +6,7 @@
     "usage": "Usage",
     "totalStorage": "Storage",
     "files": "Files stored",
-    "recentFiles": "Recent files"
+    "recentFiles": "Recent files",
+    "fileDeleted": "File deleted successfully",
+    "fileDeleteFailed": "Failed to delete file"
 }

@@ -6,5 +6,7 @@
     "usage": "ご利用状況",
     "totalStorage": "ストレージ",
     "files": "ファイル数",
-    "recentFiles": "最近アップロードされたファイル"
+    "recentFiles": "最近アップロードされたファイル",
+    "fileDeleted": "ファイルを削除しました",
+    "fileDeleteFailed": "ファイルを削除できませんでした"
 }
