@@ -30,5 +30,8 @@
     "toUnlock": "ロック解除",
     "embedPreview": "埋め込みプレビュー",
     "save": "保存",
-    "embedSaved": "埋め込み設定を保存しました"
+    "embedSaved": "埋め込み設定を保存しました",
+    "discordPrefetch": "Discord埋め込みプリフェッチ",
+    "discordPrefetchDesc": "Discordにリンクを貼り付けたときに埋め込みデータを事前に取得するには、これを有効にします。これにより、作成したすべてのリンクがsukushocloudの内部Discordチャンネルに投稿されます。",
+    "prefetchSaved": "Discordプリフェッチ設定を保存しました"
 }

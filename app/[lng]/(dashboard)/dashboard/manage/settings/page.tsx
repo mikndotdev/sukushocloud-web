@@ -6,6 +6,7 @@ export const runtime = "edge";
 import Link from "next/link";
 import { Heading } from "@/app/components/nUI/Heading";
 import { Button } from "@/app/components/shadcn/ui/button";
+import { Switch } from "@/app/components/shadcn/ui/switch";
 import {
     Select,
     SelectContent,
@@ -59,6 +60,7 @@ export default function Home({ params: { lng } }: Props) {
     const [embedHeader, setEmbedHeader] = useState("");
     const [embedFooter, setEmbedFooter] = useState("");
     const [embedColor, setEmbedColor] = useState("");
+    const [prefetch, setPrefetch] = useState(false);
 
     const regions = [
         { name: t("fra"), value: "fra", flag: "DE" },
@@ -91,6 +93,7 @@ export default function Home({ params: { lng } }: Props) {
                     setEmbedHeader(data.embedHeader);
                     setEmbedFooter(data.embedFooter);
                     setEmbedColor(data.embedColor);
+                    setPrefetch(data.allowDiscordPrefetch);
                     setInfoLoading(false);
                 });
         }
@@ -195,6 +198,25 @@ export default function Home({ params: { lng } }: Props) {
         );
     }
 
+    const changePrefetch = async () => {
+        const res = await fetch("/api/userinfo/setPrefetch", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                prefetch: !prefetch,
+            }),
+        });
+        if (!res.ok) {
+            toast.error(t("generalError"));
+            return;
+        }
+        const json = await res.json();
+        setPrefetch(json.prefetch);
+        toast.success(t("prefetchSaved"));
+    };
+
     return (
         <div className="flex min-h-screen">
             <main className="w-full px-4 md:px-0 max-w-7xl mx-auto">
@@ -236,7 +258,7 @@ export default function Home({ params: { lng } }: Props) {
                                 }}
                                 className="w-full sm:w-auto bg-primary"
                             >
-                                <FaCopy className="w-5 h-5 mr-2" />
+                                <FaCopy className="w-5 h-5 mr-2"/>
                                 {t("copy")}
                             </Button>
                             <Button
@@ -244,14 +266,14 @@ export default function Home({ params: { lng } }: Props) {
                                 onClick={() => resetAPIKey()}
                                 className="w-full sm:w-auto"
                             >
-                                <GrPowerReset className="w-5 h-5 mr-2" />
+                                <GrPowerReset className="w-5 h-5 mr-2"/>
                                 {t("reset")}
                             </Button>
                             <Button
                                 onClick={() => downloadSXCU()}
                                 className="w-full sm:w-auto"
                             >
-                                <SiSharex className="w-5 h-5 mr-2" />
+                                <SiSharex className="w-5 h-5 mr-2"/>
                                 {t("downloadSXCU")}
                             </Button>
                         </div>
@@ -265,7 +287,7 @@ export default function Home({ params: { lng } }: Props) {
                             onValueChange={setSelectecdRegion}
                         >
                             <SelectTrigger className="border-primary w-1/2">
-                                <SelectValue placeholder={t("selectRegion")} />
+                                <SelectValue placeholder={t("selectRegion")}/>
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup className="">
@@ -285,78 +307,89 @@ export default function Home({ params: { lng } }: Props) {
                         </Select>
                     </div>
                     <div className="space-y-4">
+                        <div className="flex flex-col space-y-0.5">
                         <Heading size="2xl" className="text-white">
-                            {t("embedSettings")}
+                            {t("discordPrefetch")}
                         </Heading>
-                        <Input
-                            value={embedHeader}
-                            onChange={(e) => setEmbedHeader(e.target.value)}
-                            placeholder={t("embedHeader")}
-                            className="w-1/2 border-primary"
-                        />
-                        <div className="flex flex-row items-center space-x-2">
+                        <Heading size="md" className="text-white">
+                            {t("discordPrefetchDesc")}
+                        </Heading>
+                        </div>
+                        <Switch checked={prefetch} onClick={changePrefetch}/>
+                    </div>
+                        <div className="space-y-4">
+                            <Heading size="2xl" className="text-white">
+                                {t("embedSettings")}
+                            </Heading>
                             <Input
-                                value={embedFooter}
-                                onChange={(e) => setEmbedFooter(e.target.value)}
-                                placeholder={t("embedFooter")}
+                                value={embedHeader}
+                                onChange={(e) => setEmbedHeader(e.target.value)}
+                                placeholder={t("embedHeader")}
                                 className="w-1/2 border-primary"
-                                disabled={
-                                    data?.plan === "FREE" ||
-                                    data?.plan === "ProLite"
-                                }
                             />
-                            {data?.plan == "FREE" ||
-                                (data?.plan == "ProLite" && (
-                                    <div className="flex flex-row space-x-1">
-                                        <Link href={"/dashboard/manage/plan"}>
+                            <div className="flex flex-row items-center space-x-2">
+                                <Input
+                                    value={embedFooter}
+                                    onChange={(e) => setEmbedFooter(e.target.value)}
+                                    placeholder={t("embedFooter")}
+                                    className="w-1/2 border-primary"
+                                    disabled={
+                                        data?.plan === "FREE" ||
+                                        data?.plan === "ProLite"
+                                    }
+                                />
+                                {data?.plan == "FREE" ||
+                                    (data?.plan == "ProLite" && (
+                                        <div className="flex flex-row space-x-1">
+                                            <Link href={"/dashboard/manage/plan"}>
+                                                <Heading
+                                                    size="xl"
+                                                    className="text-yellow-400 font-thin"
+                                                >
+                                                    {t("upgrade")}
+                                                </Heading>
+                                            </Link>
                                             <Heading
                                                 size="xl"
-                                                className="text-yellow-400 font-thin"
+                                                className="text-white font-thin"
                                             >
-                                                {t("upgrade")}
+                                                {t("toUnlock")}
                                             </Heading>
-                                        </Link>
-                                        <Heading
-                                            size="xl"
-                                            className="text-white font-thin"
-                                        >
-                                            {t("toUnlock")}
-                                        </Heading>
-                                    </div>
-                                ))}
-                        </div>
-                        <SketchPicker
-                            color={embedColor}
-                            onChange={(color: any) => setEmbedColor(color.hex)}
-                            className="w-full"
-                        />
-                        <Heading size="2xl" className="text-white">
-                            {t("embedPreview")}
-                        </Heading>
-                        <DiscordMessages>
-                            <DiscordMessage
-                                author={session?.user.name}
-                                avatar={session?.user.image}
-                            >
-                                https://sksh.me/example
-                                <DiscordEmbed
-                                    color={embedColor}
-                                    slot="embeds"
-                                    title={embedHeader}
-                                    image={Screenshot.src}
-                                    url="#"
+                                        </div>
+                                    ))}
+                            </div>
+                            <SketchPicker
+                                color={embedColor}
+                                onChange={(color: any) => setEmbedColor(color.hex)}
+                                className="w-full"
+                            />
+                            <Heading size="2xl" className="text-white">
+                                {t("embedPreview")}
+                            </Heading>
+                            <DiscordMessages>
+                                <DiscordMessage
+                                    author={session?.user.name}
+                                    avatar={session?.user.image}
                                 >
-                                    {embedFooter}
-                                </DiscordEmbed>
-                            </DiscordMessage>
-                        </DiscordMessages>
-                        <Button onClick={() => saveEmbed()} className="">
-                            <FaFloppyDisk className="w-5 h-5 mr-2" />
-                            {t("save")}
-                        </Button>
+                                    https://sksh.me/example
+                                    <DiscordEmbed
+                                        color={embedColor}
+                                        slot="embeds"
+                                        title={embedHeader}
+                                        image={Screenshot.src}
+                                        url="#"
+                                    >
+                                        {embedFooter}
+                                    </DiscordEmbed>
+                                </DiscordMessage>
+                            </DiscordMessages>
+                            <Button onClick={() => saveEmbed()} className="">
+                                <FaFloppyDisk className="w-5 h-5 mr-2"/>
+                                {t("save")}
+                            </Button>
+                        </div>
                     </div>
-                </div>
             </main>
         </div>
-    );
+);
 }
