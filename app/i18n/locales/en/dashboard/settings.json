@@ -32,6 +32,6 @@
     "save": "Save",
     "embedSaved": "Embed settings saved",
     "discordPrefetch": "Discord Embed Prefetch",
-    "discordPrefetchDesc": "Enable this to have the embed data prefetched when you paste a link in Discord. This will post all links you create into an internal Discord channel.",
+    "discordPrefetchDesc": "Enable this to have the embed data prefetched when you paste a link in Discord, greatly improving embed load speed. This will post all links you create into an internal Discord channel.",
     "prefetchSaved": "Discord prefetch setting saved"
 }
