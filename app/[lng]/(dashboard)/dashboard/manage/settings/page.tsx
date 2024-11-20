@@ -258,7 +258,7 @@ export default function Home({ params: { lng } }: Props) {
                                 }}
                                 className="w-full sm:w-auto bg-primary"
                             >
-                                <FaCopy className="w-5 h-5 mr-2"/>
+                                <FaCopy className="w-5 h-5 mr-2" />
                                 {t("copy")}
                             </Button>
                             <Button
@@ -266,14 +266,14 @@ export default function Home({ params: { lng } }: Props) {
                                 onClick={() => resetAPIKey()}
                                 className="w-full sm:w-auto"
                             >
-                                <GrPowerReset className="w-5 h-5 mr-2"/>
+                                <GrPowerReset className="w-5 h-5 mr-2" />
                                 {t("reset")}
                             </Button>
                             <Button
                                 onClick={() => downloadSXCU()}
                                 className="w-full sm:w-auto"
                             >
-                                <SiSharex className="w-5 h-5 mr-2"/>
+                                <SiSharex className="w-5 h-5 mr-2" />
                                 {t("downloadSXCU")}
                             </Button>
                         </div>
@@ -287,7 +287,7 @@ export default function Home({ params: { lng } }: Props) {
                             onValueChange={setSelectecdRegion}
                         >
                             <SelectTrigger className="border-primary w-1/2">
-                                <SelectValue placeholder={t("selectRegion")}/>
+                                <SelectValue placeholder={t("selectRegion")} />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup className="">
@@ -308,88 +308,88 @@ export default function Home({ params: { lng } }: Props) {
                     </div>
                     <div className="space-y-4">
                         <div className="flex flex-col space-y-0.5">
-                        <Heading size="2xl" className="text-white">
-                            {t("discordPrefetch")}
-                        </Heading>
-                        <Heading size="md" className="text-white">
-                            {t("discordPrefetchDesc")}
-                        </Heading>
-                        </div>
-                        <Switch checked={prefetch} onClick={changePrefetch}/>
-                    </div>
-                        <div className="space-y-4">
                             <Heading size="2xl" className="text-white">
-                                {t("embedSettings")}
+                                {t("discordPrefetch")}
                             </Heading>
+                            <Heading size="md" className="text-white">
+                                {t("discordPrefetchDesc")}
+                            </Heading>
+                        </div>
+                        <Switch checked={prefetch} onClick={changePrefetch} />
+                    </div>
+                    <div className="space-y-4">
+                        <Heading size="2xl" className="text-white">
+                            {t("embedSettings")}
+                        </Heading>
+                        <Input
+                            value={embedHeader}
+                            onChange={(e) => setEmbedHeader(e.target.value)}
+                            placeholder={t("embedHeader")}
+                            className="w-1/2 border-primary"
+                        />
+                        <div className="flex flex-row items-center space-x-2">
                             <Input
-                                value={embedHeader}
-                                onChange={(e) => setEmbedHeader(e.target.value)}
-                                placeholder={t("embedHeader")}
+                                value={embedFooter}
+                                onChange={(e) => setEmbedFooter(e.target.value)}
+                                placeholder={t("embedFooter")}
                                 className="w-1/2 border-primary"
+                                disabled={
+                                    data?.plan === "FREE" ||
+                                    data?.plan === "ProLite"
+                                }
                             />
-                            <div className="flex flex-row items-center space-x-2">
-                                <Input
-                                    value={embedFooter}
-                                    onChange={(e) => setEmbedFooter(e.target.value)}
-                                    placeholder={t("embedFooter")}
-                                    className="w-1/2 border-primary"
-                                    disabled={
-                                        data?.plan === "FREE" ||
-                                        data?.plan === "ProLite"
-                                    }
-                                />
-                                {data?.plan == "FREE" ||
-                                    (data?.plan == "ProLite" && (
-                                        <div className="flex flex-row space-x-1">
-                                            <Link href={"/dashboard/manage/plan"}>
-                                                <Heading
-                                                    size="xl"
-                                                    className="text-yellow-400 font-thin"
-                                                >
-                                                    {t("upgrade")}
-                                                </Heading>
-                                            </Link>
+                            {data?.plan == "FREE" ||
+                                (data?.plan == "ProLite" && (
+                                    <div className="flex flex-row space-x-1">
+                                        <Link href={"/dashboard/manage/plan"}>
                                             <Heading
                                                 size="xl"
-                                                className="text-white font-thin"
+                                                className="text-yellow-400 font-thin"
                                             >
-                                                {t("toUnlock")}
+                                                {t("upgrade")}
                                             </Heading>
-                                        </div>
-                                    ))}
-                            </div>
-                            <SketchPicker
-                                color={embedColor}
-                                onChange={(color: any) => setEmbedColor(color.hex)}
-                                className="w-full"
-                            />
-                            <Heading size="2xl" className="text-white">
-                                {t("embedPreview")}
-                            </Heading>
-                            <DiscordMessages>
-                                <DiscordMessage
-                                    author={session?.user.name}
-                                    avatar={session?.user.image}
-                                >
-                                    https://sksh.me/example
-                                    <DiscordEmbed
-                                        color={embedColor}
-                                        slot="embeds"
-                                        title={embedHeader}
-                                        image={Screenshot.src}
-                                        url="#"
-                                    >
-                                        {embedFooter}
-                                    </DiscordEmbed>
-                                </DiscordMessage>
-                            </DiscordMessages>
-                            <Button onClick={() => saveEmbed()} className="">
-                                <FaFloppyDisk className="w-5 h-5 mr-2"/>
-                                {t("save")}
-                            </Button>
+                                        </Link>
+                                        <Heading
+                                            size="xl"
+                                            className="text-white font-thin"
+                                        >
+                                            {t("toUnlock")}
+                                        </Heading>
+                                    </div>
+                                ))}
                         </div>
+                        <SketchPicker
+                            color={embedColor}
+                            onChange={(color: any) => setEmbedColor(color.hex)}
+                            className="w-full"
+                        />
+                        <Heading size="2xl" className="text-white">
+                            {t("embedPreview")}
+                        </Heading>
+                        <DiscordMessages>
+                            <DiscordMessage
+                                author={session?.user.name}
+                                avatar={session?.user.image}
+                            >
+                                https://sksh.me/example
+                                <DiscordEmbed
+                                    color={embedColor}
+                                    slot="embeds"
+                                    title={embedHeader}
+                                    image={Screenshot.src}
+                                    url="#"
+                                >
+                                    {embedFooter}
+                                </DiscordEmbed>
+                            </DiscordMessage>
+                        </DiscordMessages>
+                        <Button onClick={() => saveEmbed()} className="">
+                            <FaFloppyDisk className="w-5 h-5 mr-2" />
+                            {t("save")}
+                        </Button>
                     </div>
+                </div>
             </main>
         </div>
-);
+    );
 }

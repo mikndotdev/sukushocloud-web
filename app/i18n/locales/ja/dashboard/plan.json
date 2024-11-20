@@ -26,5 +26,7 @@
     "proUltDescription4": "カスタムリンク短縮",
     "proUltDescription5": "開発者の愛と感謝",
     "customerPortal": "カスタマーポータルで契約を管理",
-    "manageSubscription": "契約を管理"
+    "manageSubscription": "契約を管理",
+    "redirectingToPortal": "カスタマーポータルにリダイレクトしています...",
+    "portalError": "カスタマーポータルへのリダイレクト中にエラーが発生しました。後ほど再試行してください。"
 }

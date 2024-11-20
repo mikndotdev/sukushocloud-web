@@ -35,6 +35,7 @@
     "navigation": {
         "home": "Home",
         "features": "Features",
+        "app": "App",
         "pricing": "Pricing",
         "contact": "Contact",
         "docs": "Docs",

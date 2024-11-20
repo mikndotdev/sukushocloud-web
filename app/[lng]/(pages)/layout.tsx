@@ -53,6 +53,10 @@ export default function PagesLayout({ params: { lng }, children }: Props) {
             href: "/pricing",
         },
         {
+            name: t("navigation.app"),
+            href: "/app",
+        },
+        {
             name: t("navigation.docs"),
             href: "https://docs.sukusho.cloud/",
         },
