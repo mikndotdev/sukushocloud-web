@@ -9,14 +9,7 @@ const redis = new Redis({
     token: process.env.UPSTASH_KEY,
 })
 
-interface Props {
-    params: {
-        key: string;
-    };
-}
-
 async function encryptData(data: string, clientKey: JsonWebKey): Promise<string> {
-    //@ts-ignore
     const importedKey = await importJWK(clientKey, 'RSA-OAEP');
 
     const encoder = new TextEncoder();
@@ -30,16 +23,17 @@ async function encryptData(data: string, clientKey: JsonWebKey): Promise<string>
 }
 
 export async function GET(req: NextRequest) {
-    // Extract the key from the URL
+    // Extract the Base64 encoded key from the URL
     const url = new URL(req.url);
-    const encodedKey = url.pathname.split('/').pop();
+    const base64EncodedKey = url.pathname.split('/').pop();
 
-    if (!encodedKey) {
+    if (!base64EncodedKey) {
         return NextResponse.json({ error: 'No key provided' }, { status: 400 });
     }
 
-    // Decode the key
-    const clientKey: JsonWebKey = JSON.parse(decodeURIComponent(encodedKey));
+    // Decode the Base64 key back to a JSON string, then parse
+    const publicKeyString = atob(base64EncodedKey);
+    const clientKey: JsonWebKey = JSON.parse(publicKeyString);
 
     const session = await auth();
 
@@ -58,8 +52,8 @@ export async function GET(req: NextRequest) {
 
             const encryptedApiKey = await encryptData(apiKey, clientKey);
 
-            // Store the encrypted API key in Redis with the client's key
-            await redis.set(encodedKey, encryptedApiKey, { ex: 60 * 5 });
+            // Store the encrypted API key in Redis with the Base64 encoded key
+            await redis.set(base64EncodedKey, encryptedApiKey, { ex: 60 * 5 });
 
             return NextResponse.redirect(`https://sukusho.cloud/auth/success`);
         } catch (e) {
