@@ -7,6 +7,7 @@ import { generateKeyPair, exportJWK, importJWK, CompactEncrypt } from 'jose';
 const redis = new Redis({
     url: process.env.UPSTASH_URL,
     token: process.env.UPSTASH_KEY,
+    cache: "no-cache",
 })
 
 interface Props {
@@ -40,7 +41,7 @@ export async function GET(req: NextRequest, key: string) {
     if (session) {
         try {
             const backendRes = await fetch(
-                `https://manager.sukusho.cloud/getInfo?id=${session.user.id}&key=${process.env.BACKEND_SIGNING_KEY}`,
+                `https://manager.sukusho.cloud/getInfo?id=${session.user.id}&key=${process.env.BACKEND_SIGNING_KEY}`
             );
 
             const data = await backendRes.json();
