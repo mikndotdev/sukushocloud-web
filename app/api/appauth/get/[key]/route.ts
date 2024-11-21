@@ -1,12 +1,11 @@
 export const runtime = "edge";
 
 import { type NextRequest, NextResponse } from "next/server";
-import { Redis } from '@upstash/redis'
+import { Redis } from '@upstash/redis/cloudflare'
 
 const redis = new Redis({
     url: process.env.UPSTASH_URL,
     token: process.env.UPSTASH_KEY,
-    cache: "no-cache",
 })
 
 interface Props {
