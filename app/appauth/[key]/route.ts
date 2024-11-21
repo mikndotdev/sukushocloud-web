@@ -52,7 +52,8 @@ export async function GET(req: NextRequest, key: string) {
 
             return NextResponse.redirect(`https://sukusho.cloud/auth/success`);
         } catch (e) {
-            return NextResponse.json(e, { status: 500 });
+            console.error(e);
+            return NextResponse.json({e}, { status: 500 });
         }
     }
 }
