@@ -14,8 +14,11 @@ interface Props {
     };
 }
 
-export async function GET(req: NextRequest, key: string) {
+export async function GET(req: NextRequest, { params: { key } }: Props) {
+    console.log(key);
     const apiKey = await redis.get(key);
+
+    console.log(apiKey);
 
     if (!apiKey) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS' } });
