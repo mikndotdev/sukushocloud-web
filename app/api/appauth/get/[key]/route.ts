@@ -18,11 +18,11 @@ export async function GET(req: NextRequest, key: string) {
     const apiKey = await redis.get(key);
 
     if (!apiKey) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS' } });
     }
 
     else {
         redis.del(key);
-        return NextResponse.json({ key: apiKey });
+        return NextResponse.json({ key: apiKey }, { status: 200, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS' } });
     }
 }
