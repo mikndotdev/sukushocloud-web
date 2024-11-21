@@ -2,7 +2,7 @@ export const runtime = "edge";
 import { type NextRequest, NextResponse } from "next/server";
 import { auth, signIn } from "@/auth";
 import { Redis } from '@upstash/redis/cloudflare'
-import { generateKeyPair, exportJWK, importJWK, CompactEncrypt } from 'jose';
+import { importJWK, CompactEncrypt } from 'jose';
 
 const redis = new Redis({
     url: process.env.UPSTASH_URL,
@@ -15,10 +15,8 @@ interface Props {
     };
 }
 
-async function encryptData(data: string, key: string): Promise<string> {
-    const { publicKey } = await generateKeyPair('RSA-OAEP');
-    const jwk = await exportJWK(publicKey);
-    const importedKey = await importJWK(jwk, 'RSA-OAEP');
+async function encryptData(data: string, clientKey: JsonWebKey): Promise<string> {
+    const importedKey = await importJWK(clientKey, 'RSA-OAEP');
 
     const encoder = new TextEncoder();
     const encodedData = encoder.encode(data);
@@ -30,11 +28,22 @@ async function encryptData(data: string, key: string): Promise<string> {
     return jwe;
 }
 
-export async function GET(req: NextRequest, key: string) {
+export async function GET(req: NextRequest) {
+    // Extract the key from the URL
+    const url = new URL(req.url);
+    const encodedKey = url.pathname.split('/').pop();
+
+    if (!encodedKey) {
+        return NextResponse.json({ error: 'No key provided' }, { status: 400 });
+    }
+
+    // Decode the key
+    const clientKey: JsonWebKey = JSON.parse(decodeURIComponent(encodedKey));
+
     const session = await auth();
 
     if (!session) {
-        await signIn("logto")
+        await signIn("logto");
     }
 
     if (session) {
@@ -46,14 +55,15 @@ export async function GET(req: NextRequest, key: string) {
             const data = await backendRes.json();
             const apiKey = data.apiKey;
 
-            const encryptedApiKey = await encryptData(apiKey, key);
+            const encryptedApiKey = await encryptData(apiKey, clientKey);
 
-            await redis.set(key, encryptedApiKey, { ex: 60 * 5 });
+            // Store the encrypted API key in Redis with the client's key
+            await redis.set(encodedKey, encryptedApiKey, { ex: 60 * 5 });
 
             return NextResponse.redirect(`https://sukusho.cloud/auth/success`);
         } catch (e) {
             console.error(e);
-            return NextResponse.json({e}, { status: 500 });
+            return NextResponse.json({ e }, { status: 500 });
         }
     }
 }
