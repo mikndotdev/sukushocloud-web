@@ -1,3 +1,4 @@
+export const runtime = "edge";
 import { type NextRequest, NextResponse } from "next/server";
 import { auth, signIn } from "@/auth";
 import { Redis } from '@upstash/redis'
