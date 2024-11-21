@@ -1,8 +1,7 @@
-export const runtime = "edge";
-
 import { type NextRequest, NextResponse } from "next/server";
 import { auth, signIn } from "@/auth";
 import { Redis } from '@upstash/redis'
+import { generateKeyPair, exportJWK, importJWK, CompactEncrypt } from 'jose';
 
 const redis = new Redis({
     url: process.env.UPSTASH_URL,
@@ -15,50 +14,19 @@ interface Props {
     };
 }
 
-async function encryptData(data: string, key: CryptoKey): Promise<ArrayBuffer> {
+async function encryptData(data: string, key: string): Promise<string> {
+    const { publicKey } = await generateKeyPair('RSA-OAEP');
+    const jwk = await exportJWK(publicKey);
+    const importedKey = await importJWK(jwk, 'RSA-OAEP');
+
     const encoder = new TextEncoder();
     const encodedData = encoder.encode(data);
-    const iv = crypto.getRandomValues(new Uint8Array(12)); // Initialization vector
 
-    const encryptedData = await crypto.subtle.encrypt(
-        {
-            name: "AES-GCM",
-            iv: iv,
-        },
-        key,
-        encodedData
-    );
+    const jwe = await new CompactEncrypt(encodedData)
+        .setProtectedHeader({ alg: 'RSA-OAEP', enc: 'A256GCM' })
+        .encrypt(importedKey);
 
-    // Combine IV and encrypted data
-    const combinedData = new Uint8Array(iv.length + encryptedData.byteLength);
-    combinedData.set(iv);
-    combinedData.set(new Uint8Array(encryptedData), iv.length);
-
-    return combinedData.buffer;
-}
-
-async function getKeyFromPassword(password: string): Promise<CryptoKey> {
-    const encoder = new TextEncoder();
-    const keyMaterial = await crypto.subtle.importKey(
-        "raw",
-        encoder.encode(password),
-        { name: "PBKDF2" },
-        false,
-        ["deriveKey"]
-    );
-
-    return crypto.subtle.deriveKey(
-        {
-            name: "PBKDF2",
-            salt: encoder.encode("salt"), // Use a proper salt in production
-            iterations: 100000,
-            hash: "SHA-256",
-        },
-        keyMaterial,
-        { name: "AES-GCM", length: 256 },
-        false,
-        ["encrypt", "decrypt"]
-    );
+    return jwe;
 }
 
 export async function GET(req: NextRequest, key: string) {
@@ -77,12 +45,11 @@ export async function GET(req: NextRequest, key: string) {
             const data = await backendRes.json();
             const apiKey = data.apiKey;
 
-            const encryptionKey = await getKeyFromPassword(key);
-            const encryptedApiKey = await encryptData(apiKey, encryptionKey);
+            const encryptedApiKey = await encryptData(apiKey, key);
 
-            await redis.set(key, Buffer.from(encryptedApiKey).toString('base64'), { ex: 60 * 5 });
+            await redis.set(key, encryptedApiKey, { ex: 60 * 5 });
 
-            return NextResponse.redirect(`https://sukusho.cloud/appauth/success`);
+            return NextResponse.redirect(`https://sukusho.cloud/auth/success`);
         } catch (e) {
             return NextResponse.json(e, { status: 500 });
         }
