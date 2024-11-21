@@ -10,6 +10,7 @@ const redis = new Redis({
 })
 
 async function encryptData(data: string, clientKey: JsonWebKey): Promise<string> {
+    //@ts-ignore
     const importedKey = await importJWK(clientKey, 'RSA-OAEP');
 
     const encoder = new TextEncoder();
