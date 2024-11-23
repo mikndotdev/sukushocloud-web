@@ -338,8 +338,7 @@ export default function Home({ params: { lng } }: Props) {
                                     data?.plan === "ProLite"
                                 }
                             />
-                            {data?.plan == "FREE" ||
-                                (data?.plan == "ProLite" && (
+                            {(data?.plan === "FREE" || data?.plan === "ProLite") && (
                                     <div className="flex flex-row space-x-1">
                                         <Link href={"/dashboard/manage/plan"}>
                                             <Heading
@@ -356,7 +355,7 @@ export default function Home({ params: { lng } }: Props) {
                                             {t("toUnlock")}
                                         </Heading>
                                     </div>
-                                ))}
+                                )}
                         </div>
                         <SketchPicker
                             color={embedColor}
