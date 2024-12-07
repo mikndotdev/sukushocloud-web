@@ -1,5 +1,5 @@
 "use client";
-import {RainbowButton} from "@/app/components/magicui/RainbowButton";
+import { RainbowButton } from "@/app/components/magicui/RainbowButton";
 
 export const runtime = "edge";
 
@@ -43,7 +43,10 @@ export default function Home({ params: { lng } }: Props) {
                     </Heading>
                 </div>
                 <div className="flex flex-col sm:flex-row justify-center mt-10 space-y-4 sm:space-y-0 sm:space-x-4">
-                    <Link href="https://github.com/mikndotdev/sukushocloud-client/releases/latest" className="w-full sm:w-auto">
+                    <Link
+                        href="https://github.com/mikndotdev/sukushocloud-client/releases/latest"
+                        className="w-full sm:w-auto"
+                    >
                         <Button className="px-5 py-3 sm:py-5 w-full">
                             {t("download")}
                         </Button>

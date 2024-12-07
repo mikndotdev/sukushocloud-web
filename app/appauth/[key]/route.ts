@@ -1,23 +1,26 @@
 export const runtime = "edge";
 import { type NextRequest, NextResponse } from "next/server";
 import { auth, signIn } from "@/auth";
-import { Redis } from '@upstash/redis/cloudflare'
-import { importJWK, CompactEncrypt } from 'jose';
+import { Redis } from "@upstash/redis/cloudflare";
+import { importJWK, CompactEncrypt } from "jose";
 
 const redis = new Redis({
     url: process.env.UPSTASH_URL,
     token: process.env.UPSTASH_KEY,
-})
+});
 
-async function encryptData(data: string, clientKey: JsonWebKey): Promise<string> {
+async function encryptData(
+    data: string,
+    clientKey: JsonWebKey,
+): Promise<string> {
     //@ts-ignore
-    const importedKey = await importJWK(clientKey, 'RSA-OAEP');
+    const importedKey = await importJWK(clientKey, "RSA-OAEP");
 
     const encoder = new TextEncoder();
     const encodedData = encoder.encode(data);
 
     const jwe = await new CompactEncrypt(encodedData)
-        .setProtectedHeader({ alg: 'RSA-OAEP', enc: 'A256GCM' })
+        .setProtectedHeader({ alg: "RSA-OAEP", enc: "A256GCM" })
         .encrypt(importedKey);
 
     return jwe;
@@ -26,10 +29,10 @@ async function encryptData(data: string, clientKey: JsonWebKey): Promise<string>
 export async function GET(req: NextRequest) {
     // Extract the Base64 encoded key from the URL
     const url = new URL(req.url);
-    const base64EncodedKey = url.pathname.split('/').pop();
+    const base64EncodedKey = url.pathname.split("/").pop();
 
     if (!base64EncodedKey) {
-        return NextResponse.json({ error: 'No key provided' }, { status: 400 });
+        return NextResponse.json({ error: "No key provided" }, { status: 400 });
     }
 
     // Decode the Base64 key back to a JSON string, then parse
@@ -45,7 +48,7 @@ export async function GET(req: NextRequest) {
     if (session) {
         try {
             const backendRes = await fetch(
-                `https://manager.sukusho.cloud/getInfo?id=${session.user.id}&key=${process.env.BACKEND_SIGNING_KEY}`
+                `https://manager.sukusho.cloud/getInfo?id=${session.user.id}&key=${process.env.BACKEND_SIGNING_KEY}`,
             );
 
             const data = await backendRes.json();

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
+import { CSPostHogProvider } from "@/app/components/posthog";
 import { Toaster } from "sonner";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -20,15 +21,12 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${hsr.className} antialiased`}>
-                <SessionProvider>
-                    <Toaster richColors />
-                    {children}
-                </SessionProvider>
-                <script
-                    defer
-                    src="https://analytics.mikandev.com/script.js"
-                    data-website-id="2bc3e16e-558d-43ef-a7a3-dafd1fb59dd3"
-                />
+                <CSPostHogProvider>
+                    <SessionProvider>
+                        <Toaster richColors />
+                        {children}
+                    </SessionProvider>
+                </CSPostHogProvider>
             </body>
         </html>
     );

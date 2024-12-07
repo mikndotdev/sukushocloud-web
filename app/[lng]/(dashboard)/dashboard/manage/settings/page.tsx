@@ -338,24 +338,25 @@ export default function Home({ params: { lng } }: Props) {
                                     data?.plan === "ProLite"
                                 }
                             />
-                            {(data?.plan === "FREE" || data?.plan === "ProLite") && (
-                                    <div className="flex flex-row space-x-1">
-                                        <Link href={"/dashboard/manage/plan"}>
-                                            <Heading
-                                                size="xl"
-                                                className="text-yellow-400 font-thin"
-                                            >
-                                                {t("upgrade")}
-                                            </Heading>
-                                        </Link>
+                            {(data?.plan === "FREE" ||
+                                data?.plan === "ProLite") && (
+                                <div className="flex flex-row space-x-1">
+                                    <Link href={"/dashboard/manage/plan"}>
                                         <Heading
                                             size="xl"
-                                            className="text-white font-thin"
+                                            className="text-yellow-400 font-thin"
                                         >
-                                            {t("toUnlock")}
+                                            {t("upgrade")}
                                         </Heading>
-                                    </div>
-                                )}
+                                    </Link>
+                                    <Heading
+                                        size="xl"
+                                        className="text-white font-thin"
+                                    >
+                                        {t("toUnlock")}
+                                    </Heading>
+                                </div>
+                            )}
                         </div>
                         <SketchPicker
                             color={embedColor}

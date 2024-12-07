@@ -22,7 +22,12 @@ import { use, useEffect, useState } from "react";
 
 import mikan from "@/app/assets/mikan.png";
 import MikanLogo from "@/app/assets/mikan-vtube.svg";
-import { FaGlobeAmericas, FaHome, FaFile } from "react-icons/fa";
+import {
+    FaGlobeAmericas,
+    FaHome,
+    FaFile,
+    FaCloudUploadAlt,
+} from "react-icons/fa";
 import { FaGear, FaMoneyBill } from "react-icons/fa6";
 
 interface Props {
@@ -111,6 +116,16 @@ export function AppSidebar({ params: { lng } }: Props) {
                         >
                             <FaHome className="mr-1" />
                             {t("home")}
+                        </Button>
+                    </Link>
+                    <Link href="/dashboard/upload">
+                        <Button
+                            variant="default"
+                            className="w-full text-white"
+                            disabled={PageOnDashboard === "upload"}
+                        >
+                            <FaCloudUploadAlt className="mr-1" />
+                            {t("upload")}
                         </Button>
                     </Link>
                     <Link href="/dashboard/manage/files">
