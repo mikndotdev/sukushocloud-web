@@ -1,20 +1,15 @@
 "use client";
 export const runtime = "edge";
 
-import Image from "next/image";
-import Link from "next/link";
 import { Heading } from "@/app/components/nUI/Heading";
 import { Button } from "@/app/components/shadcn/ui/button";
 import { FileComponent } from "@/app/components/fileComponent";
-import { GaugeComponent } from "react-gauge-component";
-import { useRouter } from "next/navigation";
 import { useSession, signIn } from "next-auth/react";
 import { useClientTranslation } from "@/app/i18n/client";
 import { useState, useEffect, use } from "react";
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { IoReload } from "react-icons/io5";
-import { Card, CardContent, CardTitle } from "@/app/components/shadcn/ui/card";
 
 interface Props {
     params: {
