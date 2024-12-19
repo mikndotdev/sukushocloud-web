@@ -9,6 +9,8 @@ if (typeof window !== "undefined") {
         person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
     });
 }
-export function CSPostHogProvider({ children: children }: Readonly<{ children: ReactNode }>) {
+export function CSPostHogProvider({
+    children: children,
+}: Readonly<{ children: ReactNode }>) {
     return <PostHogProvider client={posthog}>{children}</PostHogProvider>;
 }

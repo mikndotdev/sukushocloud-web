@@ -13,6 +13,7 @@ import { useClientTranslation } from "@/app/i18n/client";
 import { useState, useEffect, use } from "react";
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { IoReload } from "react-icons/io5";
 import { Card, CardContent, CardTitle } from "@/app/components/shadcn/ui/card";
 
 interface Props {
@@ -22,7 +23,6 @@ interface Props {
 }
 
 export default function Home({ params: { lng } }: Props) {
-    const router = useRouter();
     const { data: session, status } = useSession();
     const { t } = useClientTranslation(lng, "dashboard/files");
     const en = lng === "en";
@@ -31,28 +31,42 @@ export default function Home({ params: { lng } }: Props) {
         plan: string;
     }
 
+    const [fetching, setFetching] = useState(false);
     const [data, setData] = useState<UserInfo | null>(null);
     const [totalStorage, setTotalStorage] = useState(0);
     const [totalUsage, setTotalUsage] = useState(0);
     const [files, setFiles] = useState<any[]>([]);
     const [infoLoading, setInfoLoading] = useState(true);
 
+    const fetchData = () => {
+        setFetching(true);
+        fetch("/api/userinfo/fileList", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setFiles(data);
+                setInfoLoading(false);
+            });
+        setFetching(false);
+    };
+
     useEffect(() => {
         if (status === "authenticated") {
-            fetch("/api/userinfo", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    setData(data);
-                    setTotalStorage(data.totalStorage);
-                    setTotalUsage(data.usedStorage);
-                });
+            fetchData();
         }
     }, [status]);
+
+    useEffect(() => {
+        setInterval(() => {
+            if (status === "authenticated") {
+                fetchData();
+            }
+        }, 30000);
+    }, []);
 
     useEffect(() => {
         if (status === "authenticated") {
@@ -85,6 +99,13 @@ export default function Home({ params: { lng } }: Props) {
                     <Heading size="2xl" className="text-white">
                         {t("Files")}
                     </Heading>
+                    <Button
+                        onClick={fetchData}
+                        className="flex items-center gap-2"
+                        disabled={fetching}
+                    >
+                        <IoReload />
+                    </Button>
                 </div>
 
                 {/* Recent Files Grid */}
