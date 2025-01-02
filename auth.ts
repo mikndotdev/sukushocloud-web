@@ -80,6 +80,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                         name: userInfo.name ?? userInfo.username,
                         email: userInfo.email,
                         image: userInfo.picture,
+                        emailVerified: userInfo.email_verified,
                     };
                 } else {
                     console.error(
