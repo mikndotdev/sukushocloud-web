@@ -135,6 +135,7 @@ export function FileComponent({
                             <Link
                                 href={`/dashboard/delete/${id}`}
                                 className="w-full"
+                                prefetch={false}
                             >
                                 <Button className="bg-red-600 hover:bg-red-700 w-full">
                                     <FaTrash className="w-4 h-4 mr-2" />
