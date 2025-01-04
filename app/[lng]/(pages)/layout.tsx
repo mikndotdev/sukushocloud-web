@@ -196,7 +196,7 @@ export default function PagesLayout({ params: { lng }, children }: Props) {
             <Footer
                 social={social}
                 links={links}
-                copylight="2020-2024 MikanDev"
+                copylight={`2020-${new Date().getFullYear()} MikanDev`}
                 className="text-white bg-[#6214d2]"
             >
                 <div className="flex items-center self-end">
