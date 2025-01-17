@@ -203,7 +203,7 @@ export default function Home({ params: { lng } }: Props) {
                     </div>
                     <div className="flex flex-col justify-center space-y-5 w-full sm:w-1/2">
                         {[
-                            { value: 9, description: "uploadRegions" },
+                            { value: 42, description: "uploadRegions" },
                             { value: 12, description: "storageRegions" },
                             { value: 119, description: "cdnPOPs" },
                         ].map((item, index) => (
