@@ -51,7 +51,7 @@ export default function Home({ params: { lng } }: Props) {
                 t("proLiteDescription1"),
                 t("proLiteDescription2"),
             ],
-            link: "https://payments.mikandev.com/instant-checkout/sksh-pro-lite",
+            link: "https://payments.mikandev.com/instant-checkout/31317262-fae0-4e20-9672-5316d4c65246",
         },
         {
             title: t("proStd"),
@@ -64,7 +64,7 @@ export default function Home({ params: { lng } }: Props) {
                 t("proStdDescription3"),
                 t("proStdDescription4"),
             ],
-            link: "https://payments.mikandev.com/instant-checkout/sksh-pro-std",
+            link: "https://payments.mikandev.com/instant-checkout/95808e7f-86c1-4da0-99f3-4c1a35bbd0e3",
         },
         {
             title: t("proUlt"),
@@ -78,7 +78,7 @@ export default function Home({ params: { lng } }: Props) {
                 t("proUltDescription4"),
                 { text: t("proUltDescription5"), icon: "heart" },
             ],
-            link: "https://payments.mikandev.com/instant-checkout/sksh-pro-ult",
+            link: "https://payments.mikandev.com/instant-checkout/b73eb559-871f-4cde-b1d2-6013303a213e",
         },
     ];
 
