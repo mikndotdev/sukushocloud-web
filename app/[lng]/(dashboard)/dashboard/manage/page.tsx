@@ -7,11 +7,11 @@ import { Heading } from "@/app/components/nUI/Heading";
 import { Button } from "@/app/components/shadcn/ui/button";
 import { FileComponent } from "@/app/components/fileComponent";
 import { GaugeComponent } from "react-gauge-component";
-import { useSearchParams, useRouter } from "next/navigation";
-import { useSession, signIn } from "next-auth/react";
-import { useClientTranslation } from "@/app/i18n/client";
-import { useState, useEffect } from "react";
-import { toast } from "sonner";
+import { useSearchParams, useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { useClientTranslation } from '@/app/i18n/client';
+import { useState, useEffect } from 'react';
+import { toast } from 'sonner';
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Card, CardContent, CardTitle } from "@/app/components/shadcn/ui/card";
