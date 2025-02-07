@@ -45,7 +45,6 @@ export default function Home({ params: { lng } }: Props) {
 
     return (
         <div className="flex min-h-screen w-full flex-col items-start justify-start p-4">
-            {userData && <p>User ID: {userData.id}</p>}
             <Input type="file" id="fileInput" name="fileInput" />
             <Button className="mt-4 w-full sm:w-auto bg-primary">
                 Upload
