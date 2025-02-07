@@ -2,6 +2,7 @@
 export const runtime = "edge";
 import { Button } from "@/app/components/shadcn/ui/button";
 import { useState, useEffect } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 interface Props {
     params: {
@@ -14,13 +15,13 @@ export default function Home({ params: { lng } }: Props) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        function fetchUserData() {
+        async function fetchUserData() {
             try {
-                const response = fetch('/api/userinfo');
+                const response = await fetch('/api/userinfo');
                 if (!response.ok) {
                     throw new Error('Failed to fetch user data');
                 }
-                const data = response.json();
+                const data = await response.json();
                 setUserData(data);
             } catch (error) {
                 console.error("Error fetching user ", error);
@@ -34,7 +35,11 @@ export default function Home({ params: { lng } }: Props) {
     }, []);
 
     if (loading) {
-        return <div className="flex min-h-screen w-full items-center justify-center p-4">Loading user data...</div>;
+        return (
+            <div className="flex min-h-screen w-full items-center justify-center p-4">
+                <AiOutlineLoading3Quarters className="w-12 h-12 animate-spin text-white" />
+            </div>
+        );
     }
 
     return (
