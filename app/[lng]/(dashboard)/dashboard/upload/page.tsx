@@ -1,6 +1,5 @@
 export const runtime = "edge";
-
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { Button } from "@/app/components/shadcn/ui/button";
 
 interface Props {
     params: {
@@ -12,9 +11,9 @@ export default async function Home({ params: { lng } }: Props) {
     return (
         <div className="flex min-h-screen w-full flex-col items-center justify-center p-4">
             <input type="file" id="fileInput" name="fileInput" />
-            <button className="mt-4 rounded bg-blue-500 px-4 py-2 text-white">
+            <Button className="mt-4 rounded px-4 py-2 text-white">
                 Upload
-            </button>
+            </Button>
         </div>
     );
 }
