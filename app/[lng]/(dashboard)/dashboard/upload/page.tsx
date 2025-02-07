@@ -9,9 +9,12 @@ interface Props {
 }
 
 export default async function Home({ params: { lng } }: Props) {
-        return (
-            <div className="flex min-h-screen items-center justify-center p-4">
-                <AiOutlineLoading3Quarters className="w-12 h-12 animate-spin text-white"/>
-            </div>
-        );
+    return (
+        <div className="flex min-h-screen w-full flex-col items-center justify-center p-4">
+            <input type="file" id="fileInput" name="fileInput" />
+            <button className="mt-4 rounded bg-blue-500 px-4 py-2 text-white">
+                Upload
+            </button>
+        </div>
+    );
 }
