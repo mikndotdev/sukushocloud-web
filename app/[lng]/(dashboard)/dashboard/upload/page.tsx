@@ -1,3 +1,4 @@
+"use client";
 export const runtime = "edge";
 import { Button } from "@/app/components/shadcn/ui/button";
 import { useState, useEffect } from "react";
@@ -8,18 +9,18 @@ interface Props {
     };
 }
 
-export default async function Home({ params: { lng } }: Props) {
+export default function Home({ params: { lng } }: Props) {
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        async function fetchUserData() {
+        function fetchUserData() {
             try {
-                const response = await fetch('/api/userinfo');
+                const response = fetch('/api/userinfo');
                 if (!response.ok) {
                     throw new Error('Failed to fetch user data');
                 }
-                const data = await response.json();
+                const data = response.json();
                 setUserData(data);
             } catch (error) {
                 console.error("Error fetching user ", error);
