@@ -72,14 +72,14 @@ export default function Home({ params: { lng } }: Props) {
 
     if (status === "loading" || infoLoading) {
         return (
-            <div className="flex min-h-screen items-center justify-center p-4">
+            <div className="flex min-h-screen items-start justify-start p-4">
                 <AiOutlineLoading3Quarters className="w-12 h-12 animate-spin text-white" />
             </div>
         );
     }
 
     return (
-        <div className="flex min-h-screen">
+        <div className="flex min-h-screen items-start justify-start">
             <main className="w-full p-4 md:p-0">
                 <Heading size="4xl" className="text-white break-words">
                     {t("welcomeMessage")} {session?.user.name}

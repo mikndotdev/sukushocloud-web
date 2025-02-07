@@ -37,14 +37,14 @@ export default function Home({ params: { lng } }: Props) {
 
     if (loading) {
         return (
-            <div className="flex min-h-screen w-full items-center justify-center p-4">
+            <div className="flex min-h-screen w-full items-start justify-start p-4">
                 <AiOutlineLoading3Quarters className="w-12 h-12 animate-spin text-white" />
             </div>
         );
     }
 
     return (
-        <div className="flex min-h-screen w-full flex-col items-center justify-center p-4">
+        <div className="flex min-h-screen w-full flex-col items-start justify-start p-4">
             {userData && <p>User ID: {userData.id}</p>}
             <Input type="file" id="fileInput" name="fileInput" />
             <Button className="mt-4 rounded px-4 py-2 text-white">
