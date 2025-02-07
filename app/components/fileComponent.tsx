@@ -90,19 +90,19 @@ export function FileComponent({
                         <div className="grid grid-cols-2 gap-3">
                             <Button
                                 className="bg-primary hover:bg-primary/90 w-full"
-                                onClick={() => copyUrl(url)}
-                            >
-                                <FaImage className="w-4 h-4 mr-2" />
-                                <span className="truncate">{t("copyUrl")}</span>
-                            </Button>
-                            <Button
-                                className="bg-primary hover:bg-primary/90 w-full"
                                 onClick={() => copyLink(shortUrl)}
                             >
                                 <FaLink className="w-4 h-4 mr-2" />
                                 <span className="truncate">
                                     {t("copyLink")}
                                 </span>
+                            </Button>
+                            <Button
+                                className="bg-primary hover:bg-primary/90 w-full"
+                                onClick={() => copyUrl(url)}
+                            >
+                                <FaImage className="w-4 h-4 mr-2" />
+                                <span className="truncate">{t("copyUrl")}</span>
                             </Button>
                         </div>
 

@@ -1,7 +1,7 @@
 import type React from "react";
 import { type ComponentPropsWithoutRef, forwardRef, useState } from "react";
 import { tv } from "tailwind-variants";
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useLockBodyScroll, useToggle } from "react-use";
 import pSBC from "shade-blend-color";
 import { MenuToggle } from "./MenuToggle";
