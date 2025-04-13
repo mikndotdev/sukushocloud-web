@@ -40,7 +40,7 @@ export const AlertDialog = forwardRef<
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
             >
-                <div className="fixed inset-0 bg-night/20 backdrop-blur-sm" />
+                <div className="fixed inset-0 bg-night/20 backdrop-blur-xs" />
             </Transition.Child>
 
             <div className="fixed inset-0 flex min-h-full items-center justify-center overflow-y-auto p-4 text-center">

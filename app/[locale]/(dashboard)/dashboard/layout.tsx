@@ -18,7 +18,7 @@ export default function PagesLayout({ params: { lng }, children }: Props) {
     return (
         <>
             <SidebarProvider>
-                <div className="grid grid-cols-[auto,1fr] h-screen">
+                <div className="grid grid-cols-[auto_1fr] h-screen">
                     <AppSidebar params={{ lng }} />
                     <main className="flex flex-col items-center justify-center">
                         <SidebarInset className="ml-0 md:ml-10 bg-inherit">

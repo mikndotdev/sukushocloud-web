@@ -27,7 +27,7 @@ import {
 import { FaShare } from "react-icons/fa";
 import { FaWandMagicSparkles } from "react-icons/fa6";
 import { TbWorldShare } from "react-icons/tb";
-import { routing } from "@/app/i18n/routing";
+import { routing } from "@/i18n/routing";
 
 export function generateStaticParams() {
     return routing.locales.map((locale) => ({ locale }));
@@ -40,7 +40,7 @@ export default function Home({
 }) {
     const { locale } = use(params);
     setRequestLocale(locale);
-    const t = useTranslations("index");
+    const t = useTranslations("HomePage");
 
     return (
         <main className="min-h-screen px-4 sm:px-6 lg:px-8">

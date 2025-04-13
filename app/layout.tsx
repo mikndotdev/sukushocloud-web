@@ -1,7 +1,4 @@
 import type { Metadata } from "next";
-import { SessionProvider } from "next-auth/react";
-import { CSPostHogProvider } from "@/app/components/posthog";
-import { Toaster } from "sonner";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -13,21 +10,6 @@ export const metadata: Metadata = {
         "Upload, share, and manage your screenshots with the ultimate Screenshot Platform.",
 };
 
-export default function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
-    return (
-        <html lang="en">
-            <body className={`${hsr.className} antialiased`}>
-                <CSPostHogProvider>
-                    <SessionProvider>
-                        <Toaster richColors />
-                        {children}
-                    </SessionProvider>
-                </CSPostHogProvider>
-            </body>
-        </html>
-    );
+export default function RootLayout({ children }: { children: ReactNode }) {
+    return <>{children}</>;
 }

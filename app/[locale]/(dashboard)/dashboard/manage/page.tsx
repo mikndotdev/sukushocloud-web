@@ -170,7 +170,7 @@ export default function Home({ params: { lng } }: Props) {
                 {/* Recent Files Grid */}
                 <div className="mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 w-full">
                     {data?.filesList?.map((file: any) => (
-                        <div key={file.id} className="w-full aspect-[384/200]">
+                        <div key={file.id} className="w-full aspect-384/200">
                             <FileComponent
                                 date={file.date}
                                 id={file.id}

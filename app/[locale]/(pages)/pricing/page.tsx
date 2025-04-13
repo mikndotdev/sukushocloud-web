@@ -104,7 +104,7 @@ export default function Home({ params: { lng } }: Props) {
                                     {plan.blurb}
                                 </Heading>
                             </CardHeader>
-                            <CardContent className="flex-grow">
+                            <CardContent className="grow">
                                 {plan.features.map((feature, fIndex) => (
                                     <CardDescription
                                         key={fIndex}
