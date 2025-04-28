@@ -1,7 +1,5 @@
-"use client";
-import Image from "next/image";
 import Link from "next/link";
-import { useClientTranslation } from "@/app/i18n/client";
+import { useTranslations } from "next-intl";
 import { Heading } from "@/app/components/nUI/Heading";
 import { Button } from "@/app/components/shadcn/ui/button";
 import {
@@ -15,15 +13,8 @@ import {
 
 import { FaCheckCircle, FaHeart } from "react-icons/fa";
 
-interface Props {
-    params: {
-        lng: string;
-    };
-}
-
-export default function Home({ params: { lng } }: Props) {
-    const { t } = useClientTranslation(lng, "pricing");
-    const en = lng === "en";
+export default function Home() {
+    const t = useTranslations("pricing");
 
     const plans = [
         {
