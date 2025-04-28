@@ -1,22 +1,12 @@
-"use client";
-import { RainbowButton } from "@/app/components/magicui/RainbowButton";
-
-import Image from "next/image";
 import Link from "next/link";
-import { useClientTranslation } from "@/app/i18n/client";
+import { useTranslations } from "next-intl";
 import { Heading } from "@/app/components/nUI/Heading";
 import { Button } from "@/app/components/shadcn/ui/button";
 import { BlurIn } from "@/app/components/magicui/BlurIn";
 import Particles from "@/app/components/eldoraui/particles";
 
-interface Props {
-    params: {
-        lng: string;
-    };
-}
-
-export default function Home({ params: { lng } }: Props) {
-    const { t } = useClientTranslation(lng, "app");
+export default function Home() {
+    const t = useTranslations("app");
     const en = lng === "en";
 
     return (

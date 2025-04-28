@@ -1,18 +1,10 @@
-"use client";
-import { useClientTranslation } from "@/app/i18n/client";
+import { useTranslations } from "next-intl";
 import { Heading } from "@/app/components/nUI/Heading";
 
 import { FaCheckCircle } from "react-icons/fa";
 
-interface Props {
-    params: {
-        lng: string;
-    };
-}
-
-export default function Home({ params: { lng } }: Props) {
-    const { t } = useClientTranslation(lng, "appauth");
-    const en = lng === "en";
+export default function Home() {
+    const t = useTranslations("appauth");
 
     return (
         <main className="min-h-screen px-4 sm:px-6 lg:px-8">
